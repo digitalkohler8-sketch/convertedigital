@@ -1141,6 +1141,96 @@
             display: block; font-family: 'Inter', sans-serif; font-size: 13px; color: #888;
             margin-top: 12px; opacity: 0.8; letter-spacing: 0.5px;
         }
+
+        /* ==========================================================================
+           V2 PREMIUM: MOBILE RESPONSIVENESS (PERFECT MOBILE)
+           ========================================================================== */
+        
+        /* OVERFLOW & ROOT FIXES */
+        @media (max-width: 1024px) {
+            html, body { overflow-x: hidden; width: 100%; position: relative; }
+            .container { overflow-x: hidden; padding: 0 1.5rem; }
+            
+            /* TYPOGRAPHY WITH CLAMP (Progressive Scaling) */
+            .title-hero { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; }
+            .title-section { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.2; }
+            .subtitle { font-size: clamp(1.125rem, 4vw, 1.25rem); }
+            .sim-h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+            .sim-p { font-size: clamp(1rem, 4vw, 1.25rem); }
+            
+            /* ANIMATION PREVENT OVERFLOW */
+            .wa-float { transform: translateX(150%); } /* Safe off-canvas */
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 0; overflow: hidden; }
+            
+            /* GRID FIXES */
+            .portfolio-grid, .dores-grid, .pilares-grid, .servicos-grid, .footer-grid, .sim-grid, .autoridade-flex {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            
+            /* TIMELINE FIXES */
+            .timeline-line, .timeline-progress { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 60px; padding-right: 0; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-dot { left: 8px; transform: translateX(0); }
+
+            /* PORTFOLIO FIXES */
+            .port-card { height: auto; min-height: 380px; }
+            .portfolio-filters { 
+                flex-wrap: nowrap; overflow-x: auto; 
+                justify-content: flex-start; padding-bottom: 12px;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+            }
+            .portfolio-filters::-webkit-scrollbar { display: none; }
+            
+            /* HERO FIXES */
+            .hero { min-height: 100svh; height: auto; padding-top: 100px; padding-bottom: 40px; }
+            .typewriter-wrap { height: auto; min-height: 80px; }
+            
+            /* DORES */
+            .dor-card { flex-direction: column; align-items: flex-start; }
+            
+            /* CTAs & BUTTONS */
+            .hero-buttons { flex-direction: column; gap: 16px; width: 100%; }
+            .btn-primary, .btn-secondary, .v2-btn-advanced { width: 100%; text-align: center; justify-content: center; min-height: 56px; }
+            
+            /* IMAGES & MEDIAS */
+            img, svg { max-width: 100%; height: auto; }
+            
+            /* CREDIBILITY BAR */
+            .credibility-bar { gap: 16px; flex-direction: column; padding-top: 40px; margin-top: 40px; }
+            .cred-item:not(:last-child)::after { width: 40px; height: 1px; margin: 12px 0; }
+            
+            /* V2 ENTRANCE LOGO OVERFLOW */
+            .v2-entrance-logo { font-size: clamp(1.5rem, 6vw, 2rem); }
+            .sim-navbar { padding: 16px 5%; }
+            
+            /* NAV OVERFLOW */
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .title-hero { font-size: clamp(2rem, 10vw, 2.5rem); }
+            .glass-card { padding: 24px 16px; }
+            .feat-left { padding: 24px 16px; }
+            .sim-section { padding: 60px 5%; }
+            .sim-card { padding: 24px; }
+            
+            .numeros-grid { grid-template-columns: 1fr; }
+            .num-value { font-size: 48px; }
+        }
+
+        @media (max-width: 375px) {
+            .container { padding: 0 1rem; }
+            .title-section { font-size: clamp(1.75rem, 8vw, 2rem); }
+            .nav-container { padding: 0 16px; }
+            .logo-wrap { font-size: 20px; }
+            .servico-icon { width: 48px; height: 48px; font-size: 24px; }
+        }
     </style>
 </head>
 <body>
