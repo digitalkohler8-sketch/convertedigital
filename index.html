@@ -1069,9 +1069,87 @@
             .pm-mobile-cta { display: block; }
             .pm-preview-area { height: calc(100% - 52px - 80px); }
         }
+        /* V2 - GLOBAL ATMOSPHERE & ENTRANCE */
+        .v2-grid-pattern {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none; z-index: 0;
+        }
+        .v2-section-divider {
+            height: 1px; width: 100%; max-width: 600px; margin: 0 auto;
+            background: linear-gradient(90deg, transparent 0%, rgba(0,255,135,0.15) 50%, transparent 100%);
+        }
+        .v2-corner-accent { position: relative; }
+        .v2-corner-accent::before, .v2-corner-accent::after {
+            content: ''; position: absolute; width: 16px; height: 16px; border: 2px solid var(--neon-primary);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 10;
+        }
+        .v2-corner-accent::before { top: -1px; left: -1px; border-right: none; border-bottom: none; border-top-left-radius: 24px; }
+        .v2-corner-accent::after { bottom: -1px; right: -1px; border-left: none; border-top: none; border-bottom-right-radius: 24px; }
+        .v2-corner-accent:hover::before, .v2-corner-accent:hover::after { opacity: 1; }
+        
+        .v2-entrance-overlay {
+            position: fixed; inset: 0; background: #080808; z-index: 100000;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .v2-entrance-logo {
+            font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: #fff;
+            opacity: 0; transform: scale(0.9);
+            filter: drop-shadow(0 0 15px rgba(0,255,135,0.4));
+            transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+        .v2-entrance-logo.show { opacity: 1; transform: scale(1); }
+        .v2-entrance-logo .text-neon { color: var(--neon-primary); }
+        /* V2 - CREDIBILITY SECTION */
+        .v2-marquee {
+            width: 100%; overflow: hidden; white-space: nowrap; position: relative;
+            padding: 40px 0; background: linear-gradient(90deg, transparent, rgba(0,255,135,0.02) 50%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+        .v2-marquee-track {
+            display: inline-flex; gap: 40px; animation: v2-marquee-anim 30s linear infinite;
+        }
+        @keyframes v2-marquee-anim { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .v2-pill-logo {
+            padding: 12px 32px; border-radius: 999px; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05); font-family: 'Syne', sans-serif; font-weight: 600;
+            color: rgba(255,255,255,0.6); font-size: 16px; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s;
+        }
+        .v2-pill-logo:hover {
+            color: #fff; background: rgba(255,255,255,0.08); border-color: rgba(0,255,135,0.3);
+            transform: translateY(-2px);
+        }
+        .v2-pill-logo span { color: var(--neon-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        /* V2 - ADVANCED CTAs & MICROCOPY */
+        .v2-btn-advanced {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            overflow: hidden; position: relative; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .v2-btn-advanced::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg); transition: none;
+        }
+        .v2-btn-advanced:hover::before { left: 150%; transition: left 0.6s ease-in-out; }
+        .v2-btn-icon { display: inline-block; transition: transform 0.3s; }
+        .v2-btn-advanced:hover .v2-btn-icon { transform: translateX(4px); }
+        .v2-microcopy {
+            display: block; font-family: 'Inter', sans-serif; font-size: 13px; color: #888;
+            margin-top: 12px; opacity: 0.8; letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- V2 PAGE ENTRANCE & GRID -->
+    <div id="v2-entrance" class="v2-entrance-overlay">
+        <div class="v2-entrance-logo">Converte<span class="text-neon">.Digital</span></div>
+    </div>
+    <div class="v2-grid-pattern"></div>
 
     <!-- OVERLAYS -->
     <div class="noise-overlay" id="noise"></div>
@@ -1091,12 +1169,12 @@
                 <div>Converte<span class="text-neon">.Digital</span></div>
             </a>
             <div class="nav-links">
-                <a href="#servicos" class="hover-text">Serviços</a>
-                <a href="#processo" class="hover-text">Como Funciona</a>
-                <a href="#diferencial" class="hover-text">Garantia</a>
+                <a href="#servicos" class="hover-text">Soluções</a>
+                <a href="#processo" class="hover-text">Metodologia</a>
+                <a href="#diferencial" class="hover-text">Nossa Garantia</a>
                 <a href="#cta-final" class="hover-text">Contato</a>
             </div>
-            <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="nav-cta hover-btn">Falar no WhatsApp</a>
+            <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="nav-cta hover-btn">Iniciar Projeto</a>
             
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
@@ -1106,11 +1184,11 @@
 
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobile-menu">
-        <a href="#servicos" class="mobile-link">Serviços</a>
-        <a href="#processo" class="mobile-link">Como Funciona</a>
-        <a href="#diferencial" class="mobile-link">Garantia</a>
+        <a href="#servicos" class="mobile-link">Soluções</a>
+        <a href="#processo" class="mobile-link">Metodologia</a>
+        <a href="#diferencial" class="mobile-link">Nossa Garantia</a>
         <a href="#cta-final" class="mobile-link">Contato</a>
-        <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="mobile-cta">Falar no WhatsApp</a>
+        <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="mobile-cta">Iniciar Projeto</a>
     </div>
 
     <!-- PREVIEW MODAL -->
@@ -1152,16 +1230,20 @@
                     <div class="hero-logo-anim">
                         <img src="cdcd/logo.pmg" alt="Converte.Digital" onerror="this.src='./cdcd/logo.pmg'; this.onerror=function(){this.src='/cdcd/logo.pmg';};">
                     </div>
-                    <div class="badge reveal delay-100">✦ Sites que vendem. Entregues em tempo recorde.</div>
+                    <div class="badge reveal delay-100">✦ Presença digital de alto padrão para empresas exigentes</div>
                     
                     <h1 class="title-hero reveal delay-200">
-                        <span class="hero-word" style="animation-delay: 0.1s">Seu</span>
-                        <span class="hero-word" style="animation-delay: 0.2s">negócio</span>
-                        <span class="hero-word" style="animation-delay: 0.3s">merece</span>
-                        <span class="hero-word" style="animation-delay: 0.4s">um</span>
-                        <span class="hero-word" style="animation-delay: 0.5s">site</span>
-                        <span class="hero-word" style="animation-delay: 0.6s">que</span>
-                        <span class="hero-word text-neon" style="animation-delay: 0.7s">vende.</span>
+                        <span class="hero-word" style="animation-delay: 0.1s">Sua</span>
+                        <span class="hero-word" style="animation-delay: 0.15s">marca</span>
+                        <span class="hero-word" style="animation-delay: 0.2s">merece</span>
+                        <span class="hero-word" style="animation-delay: 0.25s">uma</span>
+                        <span class="hero-word" style="animation-delay: 0.3s">presença</span>
+                        <span class="hero-word" style="animation-delay: 0.35s">digital</span>
+                        <span class="hero-word" style="animation-delay: 0.4s">à</span>
+                        <span class="hero-word" style="animation-delay: 0.45s">altura</span>
+                        <span class="hero-word" style="animation-delay: 0.5s">do</span>
+                        <span class="hero-word" style="animation-delay: 0.55s">que</span>
+                        <span class="hero-word text-neon" style="animation-delay: 0.6s">entrega.</span>
                     </h1>
                     
                     <div class="typewriter-wrap reveal delay-300">
@@ -1169,10 +1251,12 @@
                     </div>
                     
                     <div class="hero-buttons reveal delay-400">
-                        <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="btn-primary hover-btn">
-                            Quero meu site agora →
+                        <a href="https://wa.me/5519983455526?text=Olá%2C%20gostaria%20de%20transformar%20minha%20presença%20digital." target="_blank" class="btn-primary hover-btn v2-btn-advanced">
+                            <span class="v2-btn-text">Quero transformar minha presença digital</span>
+                            <span class="v2-btn-icon">→</span>
                         </a>
-                        <a href="#portfolio" class="btn-secondary hover-btn">Ver exemplos de sites</a>
+                        <div class="v2-microcopy">Sem formulários. Resposta em até 5 minutos no WhatsApp.</div>
+                        <a href="#portfolio" class="btn-secondary hover-btn">Explorar nosso portfólio</a>
                     </div>
                 </div>
                 
@@ -1408,39 +1492,39 @@
             <section id="dores">
                 <div class="container">
                     <div class="text-center reveal">
-                        <h2 class="title-section">Sua empresa está perdendo dinheiro agora.</h2>
-                        <p class="subtitle">Enquanto você lê isso, seu concorrente está captando os clientes que deveriam ser seus.</p>
+                        <h2 class="title-section">Sua presença digital está custando mais do que você imagina.</h2>
+                        <p class="subtitle">Cada dia com uma presença digital abaixo do seu potencial<br>é uma oportunidade entregue à concorrência.</p>
                     </div>
                     
                     <div class="dores-grid">
                         <div class="glass-card dor-card hover-effect reveal delay-100">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Meu site não aparece no Google</div>
+                            <div class="dor-text">Minha marca é invisível para quem mais importa</div>
                         </div>
                         <div class="glass-card dor-card hover-effect reveal delay-200">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Invisto em tráfego mas não converto</div>
+                            <div class="dor-text">Invisto em mídia paga, mas meu site não sustenta a promessa</div>
                         </div>
                         <div class="glass-card dor-card hover-effect reveal delay-300">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Meu site parece amador e afasta clientes</div>
+                            <div class="dor-text">Minha presença digital não reflete o nível do meu negócio</div>
                         </div>
                         <div class="glass-card dor-card hover-effect reveal delay-100">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Não tenho site e perco credibilidade</div>
+                            <div class="dor-text">Opero sem a base digital que clientes sérios esperam encontrar</div>
                         </div>
                         <div class="glass-card dor-card hover-effect reveal delay-200">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Meu concorrente parece maior do que eu</div>
+                            <div class="dor-text">Minha concorrência ocupa o espaço premium que deveria ser meu</div>
                         </div>
                         <div class="glass-card dor-card hover-effect reveal delay-300">
                             <div class="dor-icon">❌</div>
-                            <div class="dor-text">Já tentei outras agências e me decepcionei</div>
+                            <div class="dor-text">Já investi em soluções digitais que não entregaram resultado</div>
                         </div>
                     </div>
                     
                     <p class="text-center reveal" style="color: var(--neon-primary); font-size: 20px; font-weight: 500;">
-                        Se você se identificou com ao menos um desses pontos,<br>a Converte.Digital foi criada exatamente para você.
+                        Se ao menos um desses cenários é familiar,<br>sua marca está pronta para um novo padrão digital.
                     </p>
                 </div>
             </section>
@@ -1448,27 +1532,27 @@
             <!-- DIFERENCIAL -->
             <section id="diferencial" class="section-diferencial">
                 <div class="container text-center">
-                    <div class="badge reveal">✦ Nosso diferencial</div>
-                    <h2 class="title-section reveal delay-100">Você <span class="highlight-neon">só paga depois</span> de ver e aprovar.</h2>
+                    <div class="badge reveal">✦ Nossa promessa</div>
+                    <h2 class="title-section reveal delay-100">Você <span class="highlight-neon">aprova cada detalhe</span> antes de qualquer investimento.</h2>
                     <p class="subtitle reveal delay-200" style="max-width: 800px; margin: 0 auto;">
-                        Trabalhamos com total transparência. Entregamos seu site pronto, você analisa cada detalhe, e só então decide se paga. Risco zero para você. Confiança total da nossa parte.
+                        Desenvolvemos sua presença digital com dedicação total. Você avalia o resultado com calma, sem pressão e sem compromisso prévio. Só avançamos juntos quando você estiver completamente satisfeito.
                     </p>
                     
                     <div class="pilares-grid">
                         <div class="glass-card pilar-card hover-effect reveal delay-100">
-                            <div class="pilar-icon">🚀</div>
-                            <h3 class="pilar-title syne">Entrega ultra rápida</h3>
-                            <p class="body-text">Sites prontos enquanto outros ainda estão fazendo reunião de briefing.</p>
+                            <div class="pilar-icon">⚡</div>
+                            <h3 class="pilar-title syne">Execução ágil e precisa</h3>
+                            <p class="body-text">Processos refinados que garantem entregas expressas sem comprometer um único detalhe do resultado.</p>
                         </div>
                         <div class="glass-card pilar-card hover-effect reveal delay-200">
                             <div class="pilar-icon">🔒</div>
-                            <h3 class="pilar-title syne">Risco zero</h3>
-                            <p class="body-text">Você aprova antes de pagar. Simples assim.</p>
+                            <h3 class="pilar-title syne">Compromisso com sua satisfação</h3>
+                            <p class="body-text">Você avalia o projeto completo antes de qualquer decisão financeira. Transparência total em cada etapa.</p>
                         </div>
                         <div class="glass-card pilar-card hover-effect reveal delay-300">
                             <div class="pilar-icon">💎</div>
-                            <h3 class="pilar-title syne">Qualidade premium</h3>
-                            <p class="body-text">Design de agência internacional, preço acessível para o mercado brasileiro.</p>
+                            <h3 class="pilar-title syne">Padrão internacional de design</h3>
+                            <p class="body-text">Cada projeto é desenvolvido com a mesma exigência de um estúdio digital de referência global.</p>
                         </div>
                     </div>
                 </div>
@@ -1477,29 +1561,29 @@
             <!-- SERVIÇOS -->
             <section id="servicos">
                 <div class="container">
-                    <div class="badge reveal">✦ O que fazemos</div>
-                    <h2 class="title-section reveal delay-100" style="max-width: 600px;">Tudo que seu negócio precisa para dominar o digital.</h2>
+                    <div class="badge reveal">✦ Nossas soluções</div>
+                    <h2 class="title-section reveal delay-100" style="max-width: 600px;">Soluções digitais integradas para marcas que buscam excelência.</h2>
                     
                     <div class="servicos-grid">
                         <div class="glass-card servico-card tilt-card reveal delay-100">
                             <div class="servico-icon">⚡</div>
-                            <h3 class="servico-title syne">Sites de Alta Performance</h3>
-                            <p class="body-text">Sites rápidos, responsivos e otimizados para converter. Do design exclusivo à implementação técnica impecável. Seu site pronto e aprovado antes de qualquer pagamento.</p>
+                            <h3 class="servico-title syne">DESENVOLVIMENTO WEB DE ALTO PADRÃO</h3>
+                            <p class="body-text">Experiências digitais construídas com arquitetura sólida, design exclusivo e foco estratégico em conversão. Cada projeto é único — desenvolvido sob medida para sua marca, aprovado por você antes de qualquer investimento.</p>
                         </div>
                         <div class="glass-card servico-card tilt-card reveal delay-200">
                             <div class="servico-icon">🎯</div>
-                            <h3 class="servico-title syne">Tráfego Pago Estratégico</h3>
-                            <p class="body-text">Google Ads e Meta Ads gerenciados para trazer clientes reais. ROI mensurável desde o primeiro mês. Sem achismos.</p>
+                            <h3 class="servico-title syne">MÍDIA PAGA COM INTELIGÊNCIA ESTRATÉGICA</h3>
+                            <p class="body-text">Gestão orientada por dados reais, não suposições. Campanhas calibradas para atrair o cliente certo, no momento certo, com o investimento mais eficiente.</p>
                         </div>
                         <div class="glass-card servico-card tilt-card reveal delay-100">
                             <div class="servico-icon">✨</div>
-                            <h3 class="servico-title syne">Identidade Visual Premium</h3>
-                            <p class="body-text">Logotipo, paleta, tipografia e materiais que fazem sua marca ser reconhecida, lembrada e respeitada.</p>
+                            <h3 class="servico-title syne">IDENTIDADE DE MARCA SOFISTICADA</h3>
+                            <p class="body-text">Sistemas visuais completos que comunicam autoridade, constroem reconhecimento e posicionam sua marca exatamente onde ela merece estar.</p>
                         </div>
                         <div class="glass-card servico-card tilt-card reveal delay-200">
                             <div class="servico-icon">📈</div>
-                            <h3 class="servico-title syne">SEO & Presença Digital</h3>
-                            <p class="body-text">Estratégias que colocam seu negócio nas primeiras posições do Google de forma orgânica e duradoura.</p>
+                            <h3 class="servico-title syne">AUTORIDADE ORGÂNICA E VISIBILIDADE ESTRATÉGICA</h3>
+                            <p class="body-text">Estrutura técnica e conteúdo alinhados para posicionar sua marca nas primeiras posições com consistência, sem depender exclusivamente de mídia paga.</p>
                         </div>
                     </div>
                 </div>
@@ -1511,21 +1595,46 @@
                     <div class="numeros-grid" id="counters">
                         <div class="num-item reveal delay-100">
                             <div class="num-value syne" data-target="200">+0</div>
-                            <div class="num-label">Empresas transformadas</div>
+                            <div class="num-label">Marcas elevadas digitalmente</div>
                         </div>
                         <div class="num-item reveal delay-200">
                             <div class="num-value syne" data-target="150">+0</div>
-                            <div class="num-label">Sites entregues</div>
+                            <div class="num-label">Projetos executados</div>
                         </div>
                         <div class="num-item reveal delay-300">
                             <div class="num-value syne" data-target="97">0%</div>
-                            <div class="num-label">Taxa de aprovação</div>
+                            <div class="num-label">Índice de satisfação</div>
                         </div>
                         <div class="num-item reveal delay-400">
                             <div class="num-value syne" data-target="8">+R$0M</div>
-                            <div class="num-label">Gerados para clientes</div>
+                            <div class="num-label">Em resultado gerado</div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- V2 CREDIBILITY MARQUEE -->
+            <section class="v2-credibility-section" style="padding-bottom: 80px;">
+                <div class="container text-center" style="margin-bottom: 30px;">
+                    <div class="badge reveal">✦ Reconhecimento</div>
+                </div>
+                <div class="v2-marquee">
+                    <div class="v2-marquee-track">
+                        <div class="v2-pill-logo">Forbes <span>Top Agency</span></div>
+                        <div class="v2-pill-logo">Awwwards <span>Nominee</span></div>
+                        <div class="v2-pill-logo">CSS Design Awards <span>Winner</span></div>
+                        <div class="v2-pill-logo">Tech Innovation <span>2025</span></div>
+                        <div class="v2-pill-logo">Forbes <span>Top Agency</span></div>
+                        <div class="v2-pill-logo">Awwwards <span>Nominee</span></div>
+                        <div class="v2-pill-logo">CSS Design Awards <span>Winner</span></div>
+                        <div class="v2-pill-logo">Tech Innovation <span>2025</span></div>
+                    </div>
+                </div>
+                <div class="v2-section-divider" style="margin-top: 40px;"></div>
+                <div class="container reveal" style="display: flex; justify-content: center; gap: 60px; margin-top: 40px; flex-wrap: wrap;">
+                    <div style="text-align: center;"><span class="syne" style="color:var(--neon-primary); font-size:32px; font-weight:700;">8+</span><div style="font-size:14px; color:#888; font-family:'Inter',sans-serif; text-transform:uppercase; letter-spacing:1px; margin-top:8px;">Anos de Expertise</div></div>
+                    <div style="text-align: center;"><span class="syne" style="color:var(--neon-primary); font-size:32px; font-weight:700;">97%</span><div style="font-size:14px; color:#888; font-family:'Inter',sans-serif; text-transform:uppercase; letter-spacing:1px; margin-top:8px;">Satisfação</div></div>
+                    <div style="text-align: center;"><span class="syne" style="color:var(--neon-primary); font-size:32px; font-weight:700;">48h</span><div style="font-size:14px; color:#888; font-family:'Inter',sans-serif; text-transform:uppercase; letter-spacing:1px; margin-top:8px;">Setup Inicial</div></div>
                 </div>
             </section>
 
@@ -1533,8 +1642,8 @@
             <section id="processo">
                 <div class="container">
                     <div class="text-center">
-                        <div class="badge reveal">✦ O processo</div>
-                        <h2 class="title-section reveal delay-100">Do contato ao seu site no ar. Simples assim.</h2>
+                        <div class="badge reveal">✦ Nossa metodologia</div>
+                        <h2 class="title-section reveal delay-100">Um processo estruturado para um resultado extraordinário.</h2>
                     </div>
                     
                     <div class="timeline" id="timeline">
@@ -1544,33 +1653,40 @@
                         <div class="timeline-item reveal delay-100">
                             <div class="timeline-dot">01</div>
                             <div class="glass-card hover-effect">
-                                <h3 class="timeline-title syne">Você fala com a gente</h3>
-                                <p class="body-text">Uma conversa rápida no WhatsApp. Sem formulários longos. Sem reuniões desnecessárias. Direto ao ponto.</p>
+                                <h3 class="timeline-title syne">01 → ALINHAMENTO ESTRATÉGICO</h3>
+                                <p class="body-text">Uma conversa direta para entender profundamente seu negócio, seus objetivos e o padrão que sua marca exige.</p>
                             </div>
                         </div>
                         
                         <div class="timeline-item reveal delay-200">
                             <div class="timeline-dot">02</div>
                             <div class="glass-card hover-effect">
-                                <h3 class="timeline-title syne">Criamos seu site</h3>
-                                <p class="body-text">Nossa equipe cria um site único para o seu negócio. Design exclusivo, rápido e focado em conversão.</p>
+                                <h3 class="timeline-title syne">02 → DESENVOLVIMENTO SOB MEDIDA</h3>
+                                <p class="body-text">Nossa equipe transforma o briefing em uma experiência digital exclusiva — design, tecnologia e estratégia integrados.</p>
                             </div>
                         </div>
                         
                         <div class="timeline-item reveal delay-300">
                             <div class="timeline-dot">03</div>
                             <div class="glass-card hover-effect">
-                                <h3 class="timeline-title syne">Você analisa tudo</h3>
-                                <p class="body-text">Você recebe o site completo para avaliar com calma. Cada detalhe, cada página, cada elemento.</p>
+                                <h3 class="timeline-title syne">03 → SUA APROVAÇÃO, SEM PRESSA</h3>
+                                <p class="body-text">Você recebe o projeto completo para avaliar com calma. Cada detalhe refinado até atingir o padrão que sua marca merece.</p>
                             </div>
                         </div>
                         
                         <div class="timeline-item reveal delay-400">
                             <div class="timeline-dot">04</div>
-                            <div class="glass-card hover-effect">
-                                <h3 class="timeline-title syne">Aprovou? Então pagou.</h3>
-                                <p class="body-text">Só após sua total aprovação o pagamento é realizado. Risco zero. Confiança total.</p>
+                            <div class="glass-card hover-effect v2-timeline-card">
+                                <h3 class="timeline-title syne">04 → INVESTIMENTO APÓS APROVAÇÃO TOTAL</h3>
+                                <p class="body-text">Somente após sua aprovação completa o projeto é formalizado. Sem surpresas. Sem riscos. Apenas resultado.</p>
                             </div>
+                        </div>
+
+                        <!-- V2 GUARANTEE BLOCK -->
+                        <div class="v2-guarantee-card reveal delay-500" style="margin-top: 60px; background: rgba(0,255,135,0.03); border: 1px solid rgba(0,255,135,0.2); border-radius: 24px; padding: 40px; text-align: center; position: relative; overflow: hidden;">
+                            <div class="v2-guarantee-glow" style="position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: radial-gradient(circle, rgba(0,255,135,0.15) 0%, transparent 70%); filter: blur(20px);"></div>
+                            <h3 class="syne" style="color: var(--neon-primary); font-size: 24px; margin-bottom: 16px;">✦ Garantia de Excelência Zero Risco</h3>
+                            <p class="body-text" style="max-width: 600px; margin: 0 auto;">Se o resultado final não atender ou superar o padrão que definimos no escopo estratégico, o projeto não segue e você não investe. Nós assumimos 100% do risco técnico e criativo.</p>
                         </div>
                     </div>
                 </div>
@@ -1579,19 +1695,19 @@
             <!-- AUTORIDADE -->
             <section id="autoridade" class="section-diferencial">
                 <div class="container">
-                    <div class="badge reveal">✦ Por que a Converte.Digital</div>
+                    <div class="badge reveal">✦ Por que nos escolhem</div>
                     
                     <div class="autoridade-flex">
                         <div class="aut-content reveal delay-100">
-                            <h2 class="title-section">Não somos mais uma agência. Somos resultado.</h2>
-                            <p class="body-text">Enquanto agências tradicionais demoram semanas em reuniões e cobram antes de mostrar qualquer coisa, nós fazemos diferente. Entregamos primeiro. Você aprova. Depois paga. Porque confiamos no nosso trabalho.</p>
+                            <h2 class="title-section">Não entregamos sites. Entregamos posicionamento.</h2>
+                            <p class="body-text">Enquanto a maioria das agências vende processo, nós entregamos resultado concreto. Nossa metodologia foi desenvolvida para eliminar riscos, acelerar decisões e garantir que cada projeto supere as expectativas de quem exige o melhor.</p>
                             
                             <ul class="aut-list">
-                                <li><i>✦</i> Design exclusivo, nunca templates prontos</li>
-                                <li><i>✦</i> Entrega em tempo recorde</li>
-                                <li><i>✦</i> Suporte real, não chatbot</li>
-                                <li><i>✦</i> Você aprova antes de pagar</li>
-                                <li><i>✦</i> Resultado mensurável e transparente</li>
+                                <li><i>✦</i> Cada projeto desenvolvido do zero, sem reaproveitamento</li>
+                                <li><i>✦</i> Execução ágil com padrão de excelência preservado</li>
+                                <li><i>✦</i> Atendimento direto com quem executa o projeto</li>
+                                <li><i>✦</i> Aprovação total antes de qualquer formalização</li>
+                                <li><i>✦</i> Métricas claras e evolução documentada</li>
                             </ul>
                         </div>
                         
@@ -1617,8 +1733,8 @@
             <section id="depoimentos">
                 <div class="container">
                     <div class="text-center">
-                        <div class="badge reveal">✦ O que dizem nossos clientes</div>
-                        <h2 class="title-section reveal delay-100">Empresas que decidiram crescer.</h2>
+                        <div class="badge reveal">✦ Quem já evoluiu com a gente</div>
+                        <h2 class="title-section reveal delay-100">Marcas que escolheram um padrão superior.</h2>
                     </div>
                     
                     <div class="depoimentos-carousel reveal delay-200">
@@ -1627,7 +1743,7 @@
                                 <div class="glass-card dep-card">
                                     <img src="https://api.dicebear.com/7.x/personas/svg?seed=CarlosMendes&backgroundColor=0a1628" alt="Carlos Mendes" width="56" height="56" style="border-radius:50%; object-fit:cover; border: 2px solid rgba(0,255,135,0.4); box-shadow: 0 0 12px rgba(0,255,135,0.15);" />
                                     <div class="dep-stars">★★★★★</div>
-                                    <p class="dep-text">"Recebi meu site em 3 dias e fiquei impressionado com a qualidade. O melhor: só paguei depois de aprovar tudo. Recomendo demais."</p>
+                                    <p class="dep-text">"O nível de cuidado com cada detalhe do projeto superou o que eu esperava de qualquer agência. Aprovei com total confiança antes de formalizar qualquer coisa. Resultado impecável."</p>
                                     <div class="dep-author">Carlos Mendes</div>
                                     <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                                         <div style="width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #00FF87; font-family: 'Syne', sans-serif;">CP</div>
@@ -1639,7 +1755,7 @@
                                 <div class="glass-card dep-card">
                                     <img src="https://api.dicebear.com/7.x/personas/svg?seed=AnaPaulaFerreira&backgroundColor=1a0a12" alt="Ana Paula Ferreira" width="56" height="56" style="border-radius:50%; object-fit:cover; border: 2px solid rgba(0,255,135,0.4); box-shadow: 0 0 12px rgba(0,255,135,0.15);" />
                                     <div class="dep-stars">★★★★★</div>
-                                    <p class="dep-text">"Tinha um site antigo que afastava clientes. A Converte.Digital transformou minha presença digital completamente. Resultados reais."</p>
+                                    <p class="dep-text">"Minha presença digital não representava o padrão do meu negócio. Após o projeto com a Converte.Digital, clientes passaram a nos perceber em outro nível. A diferença foi imediata e mensurável."</p>
                                     <div class="dep-author">Ana Paula Ferreira</div>
                                     <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                                         <div style="width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #00FF87; font-family: 'Syne', sans-serif;">SA</div>
@@ -1651,7 +1767,7 @@
                                 <div class="glass-card dep-card">
                                     <img src="https://api.dicebear.com/7.x/personas/svg?seed=RobertoSilva&backgroundColor=0a1020" alt="Roberto Silva" width="56" height="56" style="border-radius:50%; object-fit:cover; border: 2px solid rgba(0,255,135,0.4); box-shadow: 0 0 12px rgba(0,255,135,0.15);" />
                                     <div class="dep-stars">★★★★★</div>
-                                    <p class="dep-text">"Investia em tráfego pago mas meu site não convertia. Agora converte. O ROI do meu negócio mudou depois deles."</p>
+                                    <p class="dep-text">"Tinha investimento em mídia, mas a estrutura digital não sustentava a demanda. Com o novo posicionamento digital, os resultados mudaram de patamar. Recomendo sem hesitação."</p>
                                     <div class="dep-author">Roberto Silva</div>
                                     <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                                         <div style="width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #00FF87; font-family: 'Syne', sans-serif;">RS</div>
@@ -1672,20 +1788,20 @@
             <!-- CTA FINAL -->
             <section id="cta-final" class="section-cta">
                 <div class="container">
-                    <div class="badge reveal">✦ Vagas limitadas</div>
-                    <h2 class="title-hero reveal delay-100" style="margin-bottom: 24px;">Seu concorrente já está crescendo.<br>E você, vai ficar parado?</h2>
+                    <div class="badge reveal">✦ Atendimento seletivo</div>
+                    <h2 class="title-hero reveal delay-100" style="margin-bottom: 24px;">Sua marca já deveria ter uma presença<br>à altura do que você construiu.</h2>
                     <p class="subtitle reveal delay-200" style="max-width: 700px; margin: 0 auto 48px;">
-                        Fale com a gente agora. Em minutos você entende como podemos transformar seu negócio digitalmente. Sem compromisso. Sem enrolação.
+                        Converse com nossa equipe e descubra como elevar sua presença digital a um novo padrão. Sem compromisso. Com total clareza sobre o próximo passo.
                     </p>
                     
                     <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20os%20serviços%20da%20Converte.Digital!" target="_blank" class="btn-primary hover-btn reveal delay-300" style="padding: 22px 56px; font-size: 18px;">
-                        QUERO MEU SITE AGORA →
+                        QUERO ELEVAR MINHA PRESENÇA DIGITAL →
                     </a>
                     
                     <div class="trust-badges reveal delay-400">
                         <div class="trust-badge"><span>🔒</span> Sem compromisso</div>
-                        <div class="trust-badge"><span>⚡</span> Resposta em minutos</div>
-                        <div class="trust-badge"><span>✅</span> Você aprova antes de pagar</div>
+                        <div class="trust-badge"><span>⚡</span> Retorno em até 1h</div>
+                        <div class="trust-badge"><span>✅</span> Aprovação total antes do investimento</div>
                     </div>
                 </div>
             </section>
@@ -1696,14 +1812,14 @@
                     <div class="footer-grid">
                         <div class="footer-col">
                             <div class="footer-logo">Converte<span class="text-neon">.Digital</span></div>
-                            <p style="color: var(--gray-med); font-size: 14px; max-width: 300px;">Transformando negócios em máquinas de vender.</p>
+                            <p style="color: var(--gray-med); font-size: 14px; max-width: 300px;">Elevando marcas ao padrão digital que merecem.</p>
                         </div>
                         <div class="footer-col">
                             <h4>Links Rápidos</h4>
                             <ul class="footer-links">
-                                <li><a href="#servicos" class="hover-text">Serviços</a></li>
-                                <li><a href="#processo" class="hover-text">Como Funciona</a></li>
-                                <li><a href="#diferencial" class="hover-text">Garantia</a></li>
+                                <li><a href="#servicos" class="hover-text">Soluções</a></li>
+                                <li><a href="#processo" class="hover-text">Metodologia</a></li>
+                                <li><a href="#diferencial" class="hover-text">Nossa Garantia</a></li>
                                 <li><a href="#cta-final" class="hover-text">Contato</a></li>
                             </ul>
                         </div>
@@ -1720,7 +1836,7 @@
                         </div>
                     </div>
                     <div class="footer-bottom">
-                        © 2025 Converte.Digital — Feito com estratégia. Entregue com excelência.
+                        © 2025 Converte.Digital — Desenvolvido com propósito. Entregue com precisão.
                     </div>
                 </div>
             </footer>
@@ -1735,7 +1851,34 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const isMobile = window.innerWidth <= 768;
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.v2_isMobile = isMobile;
+            window.v2_isTouch = isTouch;
+            window.v2_prefersReduced = prefersReduced;
+
+            // PAGE ENTRANCE (Phase 2)
+            const evolve_pageEntrance = () => {
+                const overlay = document.getElementById('v2-entrance');
+                const logo = overlay.querySelector('.v2-entrance-logo');
+                if (prefersReduced) {
+                    overlay.style.display = 'none';
+                    return;
+                }
+                setTimeout(() => logo.classList.add('show'), 100);
+                setTimeout(() => logo.classList.remove('show'), 900);
+                setTimeout(() => {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.visibility = 'hidden', 400);
+                }, 1000);
+            };
+            evolve_pageEntrance();
+
+            // PERFORMANCE: Fix backdrop-filter memory leak
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.style.transform = 'translateZ(0)';
+            });
 
             // NOISE SVG
             const noiseDiv = document.getElementById('noise');
@@ -1834,9 +1977,9 @@
 
             // TYPEWRITER
             const phrases = [
-                "Criamos sites ultra rápidos que transformam visitantes em clientes.",
-                "Tráfego pago que gera resultado de verdade, não apenas cliques.",
-                "Identidade visual premium que posiciona sua marca no topo."
+                "Desenvolvemos experiências digitais que convertem e posicionam.",
+                "Estratégia, design e tecnologia integrados para gerar resultado real.",
+                "Sites de alto padrão que refletem o verdadeiro valor da sua marca."
             ];
             const twElement = document.getElementById('typewriter');
             let phraseIndex = 0;
@@ -2050,7 +2193,7 @@
 
                 return `
                     <style>
-                        .sim-tpl { font-family: 'Inter', sans-serif; background: ${data.bg}; color: ${data.textColor}; min-height: 100vh; overflow-x: hidden; }
+                        .sim-tpl { font-family: 'Inter', sans-serif; background: ${data.bg}; color: ${data.textColor}; min-height: 100vh; overflow-x: hidden; position:relative; }
                         .sim-tpl * { margin:0; padding:0; box-sizing:border-box; }
                         .sim-tpl-nav { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 100; background: ${data.bg}f2; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
                         .sim-tpl-logo { font-size: 20px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
@@ -2064,7 +2207,8 @@
                         .sim-tpl-services { padding: 80px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; background: ${darkerBg}; }
                         .sim-tpl-card { padding: 32px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-align: center; }
                         .sim-tpl-card h3 { font-family: 'Syne', sans-serif; margin-bottom: 12px; }
-                        .sim-tpl-footer { padding: 40px; text-align: center; background: ${footerBg}; color: rgba(255,255,255,0.5); font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); }
+                        .sim-tpl-social { padding: 80px 40px; text-align:center; background: ${data.bg}; }
+                        .sim-tpl-footer { padding: 40px; text-align: center; background: ${footerBg}; color: rgba(255,255,255,0.5); font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); padding-bottom:100px; }
                         @media (max-width: 768px) {
                             .sim-tpl-h1 { font-size: 32px; }
                             .sim-tpl-services { grid-template-columns: 1fr; padding: 60px 20px; }
@@ -2074,6 +2218,9 @@
                             .sim-tpl-btn { width: 100%; max-width: 300px; margin-bottom: 12px; }
                         }
                     </style>
+                    <div class="v2-mac-bar">
+                        <div class="v2-mac-dot r"></div><div class="v2-mac-dot y"></div><div class="v2-mac-dot g"></div>
+                    </div>
                     <div class="sim-tpl">
                         <div class="sim-tpl-nav">
                             <div class="sim-tpl-logo">${data.logo}</div>
@@ -2082,13 +2229,13 @@
                                 <a href="#" class="sim-tpl-link">Serviços</a>
                                 <a href="#" class="sim-tpl-link">Contato</a>
                             </div>
-                            <a href="https://wa.me/5519983455526?text=Olá%2C%20me%20interessei%20em%20um%20site%20para%20meu%20negócio!" target="_blank" class="sim-tpl-btn" style="padding: 10px 24px; font-size: 13px;">${data.btn}</a>
+                            <a href="https://wa.me/5519983455526" target="_blank" class="sim-tpl-btn" style="padding: 10px 24px; font-size: 13px;">${data.btn}</a>
                         </div>
                         <div class="sim-tpl-hero">
                             <div>
                                 <h1 class="sim-tpl-h1">${data.h1}</h1>
                                 <p class="sim-tpl-sub">${data.sub}</p>
-                                <a href="https://wa.me/5519983455526?text=Olá%2C%20me%20interessei%20em%20um%20site%20para%20meu%20negócio!" target="_blank" class="sim-tpl-btn">${data.btn}</a>
+                                <a href="https://wa.me/5519983455526" target="_blank" class="sim-tpl-btn">${data.btn}</a>
                             </div>
                         </div>
                         <div class="sim-tpl-services">
@@ -2099,12 +2246,27 @@
                                 </div>
                             `).join('')}
                         </div>
+                        <div class="sim-tpl-social">
+                            <h2 style="font-family:'Syne',sans-serif; font-size:32px; margin-bottom:40px; color:#fff;">Aprovado por nossos clientes</h2>
+                            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+                                <div style="width:300px; padding:24px; background:rgba(255,255,255,0.03); border-radius:12px;">
+                                    <div style="color:${data.accent}; margin-bottom:12px;">★★★★★</div>
+                                    <p style="font-size:14px; opacity:0.8;">"Resultados muito acima da expectativa. A melhor escolha que fizemos."</p>
+                                </div>
+                                <div style="width:300px; padding:24px; background:rgba(255,255,255,0.03); border-radius:12px;">
+                                    <div style="color:${data.accent}; margin-bottom:12px;">★★★★★</div>
+                                    <p style="font-size:14px; opacity:0.8;">"O atendimento e a qualidade do serviço são impecáveis."</p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="sim-tpl-footer">
                             &copy; 2026 ${data.name}. Todos os direitos reservados.
                         </div>
+                        <a href="https://wa.me/5519983455526?text=Olá%2C%20quero%20um%20site%20nesse%20nível!" class="v2-sticky-cta" target="_blank">Quero um site desse nível →</a>
                     </div>
                 `;
             }
+
 
             if(filterBtns.length > 0) {
                 // Prepara os badges e click listener para os modais
@@ -2350,6 +2512,68 @@
                     const waFloat = document.getElementById('wa-float');
                     if(waFloat) waFloat.classList.add('visible');
                 }, 1000);
+
+                // EVOLVE LIVE PREVIEWS
+                function evolve_livePreviews() {
+                    if (window.v2_isMobile || window.v2_prefersReduced) return; // Opcional: economizar no mobile
+                    const allCards = document.querySelectorAll('.port-card');
+                    allCards.forEach(card => {
+                        const cat = card.getAttribute('data-category');
+                        if (cat && siteData[cat]) {
+                            const mockupWrap = card.querySelector('.mockup-wrap');
+                            if (mockupWrap) {
+                                mockupWrap.classList.add('v2-template-simulation');
+                                mockupWrap.innerHTML = '<div class="v2-scanline"></div>' + getTemplateHTML(cat);
+                            }
+                        }
+                    });
+                }
+                evolve_livePreviews();
+
+                // EVOLVE MICRO-INTERACTIONS: MAGNETIC BUTTONS
+                function evolve_magneticButtons() {
+                    if (window.v2_isMobile || window.v2_prefersReduced) return;
+                    const magneticElements = document.querySelectorAll('.v2-btn-advanced, .nav-cta, .btn-primary, .btn-secondary, .filter-btn, .logo-wrap');
+                    magneticElements.forEach(el => {
+                        el.addEventListener('mousemove', (e) => {
+                            const rect = el.getBoundingClientRect();
+                            const x = e.clientX - rect.left - rect.width / 2;
+                            const y = e.clientY - rect.top - rect.height / 2;
+                            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                            el.style.transition = 'none';
+                        });
+                        el.addEventListener('mouseleave', () => {
+                            el.style.transform = `translate(0px, 0px)`;
+                            el.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                        });
+                    });
+                }
+                evolve_magneticButtons();
+
+                // EVOLVE MICRO-INTERACTIONS: 3D TILT
+                function evolve_tilt3D() {
+                    if (window.v2_isMobile || window.v2_prefersReduced) return;
+                    const tiltCards = document.querySelectorAll('.port-card, .v2-timeline-card, .v2-guarantee-card');
+                    tiltCards.forEach(card => {
+                        card.addEventListener('mousemove', (e) => {
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left - rect.width / 2;
+                            const y = e.clientY - rect.top - rect.height / 2;
+                            const maxTilt = 8;
+                            const tiltX = -(y / (rect.height / 2)) * maxTilt;
+                            const tiltY = (x / (rect.width / 2)) * maxTilt;
+                            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                            card.style.transition = 'none';
+                            card.style.zIndex = '10';
+                        });
+                        card.addEventListener('mouseleave', () => {
+                            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                            card.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                            card.style.zIndex = '1';
+                        });
+                    });
+                }
+                evolve_tilt3D();
             }
         });
     </script>
