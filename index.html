@@ -1037,88 +1037,7 @@
         .custom-cursor.cursor-open { width: 60px; height: 60px; background: var(--neon-primary); border: none; mix-blend-mode: normal; }
         .custom-cursor.cursor-open::after { content: 'ABRIR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #000; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; }
 
-        /* MODAL PREVIEW */
-        .preview-modal-wrap { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.95); backdrop-filter: blur(24px); display: none; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
-        .preview-modal-wrap.active { display: block; pointer-events: auto; }
-        .preview-modal-content { position: absolute; background: #080808; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; will-change: clip-path, transform, opacity; }
-        @media (min-width: 769px) { .preview-modal-content { inset: 0; width: 100%; height: 100%; border-radius: 0; transition: clip-path 0.4s cubic-bezier(0.77,0,0.175,1); } }
-        @media (max-width: 768px) { .preview-modal-content { inset: 0; border-radius: 0; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); } .preview-modal-wrap.active-mobile .preview-modal-content { transform: translateY(0); } }
         
-        /* MODAL TOPBAR */
-        .pm-topbar { height: 52px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; flex-shrink: 0; z-index: 10; position: relative; }
-        .pm-top-left { display: flex; align-items: center; gap: 12px; }
-        .pm-badge { background: rgba(0,255,135,0.1); border: 1px solid rgba(0,255,135,0.3); color: var(--neon-primary); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.1em; }
-        .pm-title-txt { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: #fff; }
-        .pm-mac-dots { display: flex; gap: 6px; }
-        .pm-mac-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .pm-mac-dot.red { background: #ff5f56; }
-        .pm-mac-dot.yellow { background: #ffbd2e; }
-        .pm-mac-dot.green { background: #27c93f; }
-        .pm-url-fake { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 16px; color: #888; font-size: 13px; font-family: 'Inter', sans-serif; flex: 1; text-align: center; max-width: 400px; margin: 0 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .pm-top-right { display: flex; align-items: center; gap: 16px; }
-        .pm-btn-close { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; transition: color 0.3s; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; }
-        .pm-btn-close:hover { color: #ff5f56; background: rgba(255,255,255,0.1); }
-        .pm-btn-cta { background: var(--neon-primary); color: #000; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.3s; }
-        .pm-btn-cta:hover { opacity: 0.8; }
-        @media (max-width: 768px) { .pm-mac-dots, .pm-btn-cta, .pm-url-fake { display: none; } }
-
-        /* MODAL LOADING */
-        .pm-loading { position: absolute; inset: 0; background: #080808; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s; }
-        .pm-loading img { width: 80px; height: 80px; object-fit: contain; animation: spin 10s linear infinite, glow-pulse 2.5s infinite; margin-bottom: 32px; filter: drop-shadow(0 0 15px rgba(0,255,135,0.5)); }
-        .pm-loading-bar-wrap { width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; margin-bottom: 16px; }
-        .pm-loading-bar { width: 0%; height: 100%; background: var(--neon-primary); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .pm-loading-text { font-family: 'Inter', sans-serif; font-size: 13px; color: #888; }
-        @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
-        .pm-loading-text::after { content: ''; display: inline-block; animation: dots 1.5s infinite; width: 12px; text-align: left; }
-
-        /* MODAL PREVIEW AREA (SIMULATED SITE) */
-        .pm-preview-area { height: calc(100vh - 52px); height: calc(100dvh - 52px); display: block; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0,255,135,0.3) transparent; position: relative; background: #000; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; z-index: 20; }
-        .pm-preview-area.loaded { opacity: 1; transform: translateY(0); }
-        .pm-preview-area::-webkit-scrollbar { width: 8px; }
-        .pm-preview-area::-webkit-scrollbar-track { background: transparent; }
-        .pm-preview-area::-webkit-scrollbar-thumb { background-color: rgba(0,255,135,0.3); border-radius: 4px; }
-        
-        .sim-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 24px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 10; transition: background 0.3s, padding 0.3s; }
-        .sim-navbar.scrolled { background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 16px 5%; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sim-logo { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; color: #fff; }
-        .sim-nav-links { display: flex; gap: 24px; }
-        .sim-nav-link { width: 40px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 3px; }
-        .sim-btn { background: #fff; color: #000; padding: 12px 24px; border-radius: 999px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; border: none; cursor: pointer; transition: transform 0.3s; }
-        .sim-btn:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { .sim-nav-links { display: none; } }
-        
-        .sim-hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; position: relative; }
-        .sim-hero-content { max-width: 800px; position: relative; z-index: 2; }
-        .sim-h1 { font-family: 'Syne', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 24px; }
-        .sim-p { font-family: 'Inter', sans-serif; font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.6; max-width: 600px; }
-        .sim-hero-btns { display: flex; gap: 16px; }
-        .sim-btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 999px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; cursor: pointer; transition: border-color 0.3s; }
-        .sim-btn-outline:hover { border-color: #fff; }
-        
-        .sim-section { padding: 100px 5%; background: #080808; }
-        .sim-section.alt { background: #0a0a0a; }
-        .sim-sec-title { width: 300px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 8px; margin-bottom: 64px; }
-        .sim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-        .sim-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; transition: transform 0.3s, background 0.3s; }
-        .sim-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); }
-        .sim-icon { width: 60px; height: 60px; border-radius: 16px; background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent); margin-bottom: 24px; }
-        .sim-card-title { width: 60%; height: 20px; background: rgba(255,255,255,0.8); border-radius: 4px; margin-bottom: 16px; }
-        .sim-card-text { width: 100%; height: 8px; background: rgba(255,255,255,0.4); border-radius: 4px; margin-bottom: 8px; }
-        .sim-card-text.short { width: 80%; }
-        
-        .sim-testim { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px; margin: 0 auto; }
-        .sim-avatar { width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(0,0,0,0.5)); margin-bottom: 32px; }
-        .sim-quote { font-family: 'Syne', sans-serif; font-size: 24px; color: #fff; line-height: 1.5; margin-bottom: 24px; }
-        .sim-author { width: 120px; height: 12px; background: rgba(255,255,255,0.5); border-radius: 6px; }
-        
-        .sim-footer { padding: 64px 5%; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
-        @media (max-width: 768px) { .sim-footer { flex-direction: column; gap: 32px; text-align: center; } }
-        
-        .sim-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
-        .sim-reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* PAGE BLUR FX */
-        body.modal-open #smooth-wrapper { filter: blur(8px); opacity: 0.3; transition: filter 0.4s, opacity 0.4s; }
         
         /* MOBILE FIXED CTA */
         .pm-mobile-cta { display: none; position: absolute; bottom: 0; left: 0; width: 100%; padding: 16px; background: #080808; border-top: 1px solid rgba(255,255,255,0.1); z-index: 20; }
@@ -1206,7 +1125,7 @@
         
         /* OVERFLOW & ROOT FIXES */
         @media (max-width: 1024px) {
-            html, body { overflow-x: hidden; width: 100%; position: relative; }
+            html, body { overflow-x: clip; width: 100%; position: relative; }
             .container { overflow-x: hidden; padding: 0 1.5rem; }
             
             /* TYPOGRAPHY WITH CLAMP (Progressive Scaling) */
@@ -1412,7 +1331,7 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo-wrap">
-                <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+                <img src="logo.png" alt="Logo" width="160" height="40" onerror="this.style.display='none'">
                 <div>Converte<span class="text-neon">.Digital</span></div>
             </a>
             <div class="nav-links">
@@ -1446,7 +1365,7 @@
             <section id="hero" class="hero">
                 <div class="container">
                     <div class="hero-logo-anim">
-                        <img src="cdcd/logo.pmg" alt="Converte.Digital" onerror="this.src='./cdcd/logo.pmg'; this.onerror=function(){this.src='/cdcd/logo.pmg';};">
+                        <img src="cdcd/logo.pmg" alt="Converte.Digital" width="800" height="400" onerror="this.src='./cdcd/logo.pmg'; this.onerror=function(){this.src='/cdcd/logo.pmg';};">
                     </div>
                     <div class="badge reveal delay-100">✦ Sites profissionais para empresas que exigem resultados</div>
                     
@@ -2044,7 +1963,7 @@
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 100) navbar.classList.add('scrolled');
                 else navbar.classList.remove('scrolled');
-            });
+            }, { passive: true });
 
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('open');
@@ -2122,7 +2041,7 @@
                         percent = Math.max(0, Math.min(100, percent - 20)); // Offset for better visual
                         timelineProgress.style.height = `${percent}%`;
                     }
-                });
+                }, { passive: true });
             }
 
             // COUNTERS
@@ -2156,6 +2075,7 @@
                         };
                         updateCounter();
                     });
+                    counterObserver.disconnect();
                 }
             }, { threshold: 0.5 });
             if(document.getElementById('counters')) {
@@ -2232,7 +2152,7 @@
                     lights[0].style.transform = `translateY(${scroll * 0.3}px)`;
                     lights[1].style.transform = `translateY(${scroll * 0.15}px)`;
                     lights[2].style.transform = `translateY(${scroll * 0.2}px)`;
-                });
+                }, { passive: true });
             }
 
             // WHATSAPP FLOAT DELAY
