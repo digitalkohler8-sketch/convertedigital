@@ -373,6 +373,7 @@
         /* HERO SECTION */
         .hero {
             height: 100vh;
+            height: 100dvh;
             min-height: 800px;
             display: flex;
             align-items: center;
@@ -864,20 +865,77 @@
         .filter-btn.active, .filter-btn:hover { background: rgba(0,255,135,0.12); border-color: rgba(0,255,135,0.4); color: var(--neon-primary); }
 
         /* GRID E CARDS */
-        .portfolio-grid-wrap { position: relative; }
+        /* CAROUSEL GRID E CARDS */
+        .portfolio-grid-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; }
         .portfolio-dynamic-light { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; transition: background 0.1s; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; z-index: 1; }
-        @media (max-width: 992px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
+        .portfolio-grid { 
+            display: flex; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            gap: 24px; 
+            padding: 40px calc(50vw - 200px);
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            position: relative; z-index: 1; 
+        }
+        .portfolio-grid::-webkit-scrollbar { display: none; }
         
-        .port-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 20px; overflow: hidden; position: relative; height: 380px; will-change: transform, opacity; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s; }
-        @media (max-width: 768px) { .port-card { height: 280px; } }
+        .port-card { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-subtle); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            position: relative; 
+            height: 480px; 
+            flex: 0 0 400px;
+            scroll-snap-align: center;
+            transform: scale(0.9);
+            opacity: 0.5;
+            will-change: transform, opacity; 
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease; 
+        }
+        .port-card.carousel-active {
+            transform: scale(1.05);
+            opacity: 1;
+            z-index: 10;
+        }
+        @media (max-width: 768px) { 
+            .portfolio-grid { padding: 40px calc(50vw - 150px); }
+            .port-card { flex: 0 0 300px; height: 420px; } 
+        }
         
-        .port-card.featured { grid-column: span 3; height: 460px; animation: float-card 4s ease-in-out infinite; }
-        @media (max-width: 992px) { .port-card.featured { grid-column: span 2; } }
-        @media (max-width: 768px) { .port-card.featured { grid-column: span 1; height: auto; display: flex; flex-direction: column; animation: none; } }
+        .port-card.featured { animation: none; flex: 0 0 500px; height: 480px; }
+        @media (max-width: 992px) { .port-card.featured { flex: 0 0 400px; } }
+        @media (max-width: 768px) { .port-card.featured { flex: 0 0 300px; height: 420px; display: flex; flex-direction: column; } }
         
-        @keyframes float-card { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        /* Carousel Nav */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+            margin-bottom: 40px;
+        }
+        .c-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,135,0.2);
+            color: var(--neon-primary);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .c-btn:hover {
+            background: rgba(0,255,135,0.1);
+            box-shadow: 0 0 15px rgba(0,255,135,0.3);
+            transform: scale(1.1);
+        }
 
         /* FEATURED CONTENT */
         .featured-content { display: flex; height: 100%; }
@@ -1014,7 +1072,7 @@
         .pm-loading-text::after { content: ''; display: inline-block; animation: dots 1.5s infinite; width: 12px; text-align: left; }
 
         /* MODAL PREVIEW AREA (SIMULATED SITE) */
-        .pm-preview-area { height: calc(100vh - 52px); display: block; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0,255,135,0.3) transparent; position: relative; background: #000; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; z-index: 20; }
+        .pm-preview-area { height: calc(100vh - 52px); height: calc(100dvh - 52px); display: block; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0,255,135,0.3) transparent; position: relative; background: #000; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; z-index: 20; }
         .pm-preview-area.loaded { opacity: 1; transform: translateY(0); }
         .pm-preview-area::-webkit-scrollbar { width: 8px; }
         .pm-preview-area::-webkit-scrollbar-track { background: transparent; }
@@ -1071,7 +1129,7 @@
         }
         /* V2 - GLOBAL ATMOSPHERE & ENTRANCE */
         .v2-grid-pattern {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
             background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
             background-size: 60px 60px;
             pointer-events: none; z-index: 0;
@@ -1178,7 +1236,7 @@
             .timeline-dot { left: 8px; transform: translateX(0); }
 
             /* PORTFOLIO FIXES */
-            .port-card { height: auto; min-height: 380px; }
+            .port-card { height: auto; min-height: 420px; }
             .portfolio-filters { 
                 flex-wrap: nowrap; overflow-x: auto; 
                 justify-content: flex-start; padding-bottom: 12px;
@@ -1365,7 +1423,7 @@
                         <p class="portfolio-subtitle subtitle">Cada projeto é desenvolvido sob medida, com design exclusivo e foco total em conversão. Veja alguns exemplos do nosso trabalho.</p>
                     </div>
 
-                    <div class="portfolio-filters reveal delay-100">
+                    <div class="portfolio-filters reveal delay-100" style="display:none;">
                         <button class="filter-btn active" data-filter="todos">Todos</button>
                         <button class="filter-btn" data-filter="clinica">Clínica</button>
                         <button class="filter-btn" data-filter="restaurante">Restaurante</button>
@@ -1559,6 +1617,11 @@
                                 </div>
                             </div>
 
+                        </div>
+                        
+                        <div class="carousel-nav reveal delay-200">
+                            <button class="c-btn c-prev">←</button>
+                            <button class="c-btn c-next">→</button>
                         </div>
                     </div>
 
@@ -2248,6 +2311,52 @@
             // PORTFOLIO FILTERS & PARALLAX & MODAL
             const filterBtns = document.querySelectorAll('.filter-btn');
             const portCards = document.querySelectorAll('.port-card');
+            const portGrid = document.querySelector('.portfolio-grid');
+            const cPrev = document.querySelector('.c-prev');
+            const cNext = document.querySelector('.c-next');
+
+            if(portGrid && portCards.length > 0) {
+                // Configura observer para a classe active do carrossel
+                const observerOptions = {
+                    root: portGrid,
+                    rootMargin: '0px',
+                    threshold: 0.6
+                };
+
+                const carouselObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('carousel-active');
+                        } else {
+                            entry.target.classList.remove('carousel-active');
+                        }
+                    });
+                }, observerOptions);
+
+                portCards.forEach(card => {
+                    carouselObserver.observe(card);
+                });
+
+                // Set focus to the second card initially because the first is "featured" and larger
+                setTimeout(() => {
+                    if (portCards[1]) {
+                        portGrid.scrollTo({
+                            left: portCards[1].offsetLeft - (window.innerWidth / 2) + (portCards[1].offsetWidth / 2),
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 1000);
+
+                // Navegação setas
+                if(cPrev && cNext) {
+                    cNext.addEventListener('click', () => {
+                        portGrid.scrollBy({ left: window.innerWidth > 768 ? 424 : 324, behavior: 'smooth' });
+                    });
+                    cPrev.addEventListener('click', () => {
+                        portGrid.scrollBy({ left: window.innerWidth > 768 ? -424 : -324, behavior: 'smooth' });
+                    });
+                }
+            }
             
             const modalWrap = document.getElementById('preview-modal');
             const modalContent = document.getElementById('pm-content');
@@ -2283,13 +2392,13 @@
 
                 return `
                     <style>
-                        .sim-tpl { font-family: 'Inter', sans-serif; background: ${data.bg}; color: ${data.textColor}; min-height: 100vh; overflow-x: hidden; position:relative; }
+                        .sim-tpl { font-family: 'Inter', sans-serif; background: ${data.bg}; color: ${data.textColor}; min-height: 100dvh; overflow-x: hidden; position:relative; }
                         .sim-tpl * { margin:0; padding:0; box-sizing:border-box; }
                         .sim-tpl-nav { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 100; background: ${data.bg}f2; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
                         .sim-tpl-logo { font-size: 20px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
                         .sim-tpl-links { display: flex; gap: 24px; }
                         .sim-tpl-link { color: ${data.textColor}; text-decoration: none; font-size: 14px; opacity: 0.8; }
-                        .sim-tpl-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 40px; background: ${data.heroGrad}; }
+                        .sim-tpl-hero { min-height: 100dvh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 40px; background: ${data.heroGrad}; }
                         .sim-tpl-h1 { font-size: 52px; font-weight: 800; line-height: 1.1; color: #ffffff; margin-bottom: 16px; font-family: 'Syne', sans-serif; }
                         .sim-tpl-sub { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
                         .sim-tpl-btn { padding: 16px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; cursor: pointer; border: none; transition: all 0.3s ease; background: ${data.accent}; color: ${btnTextColor}; display: inline-block; text-decoration: none; }
@@ -2470,7 +2579,7 @@
                             modalWrap.classList.remove('active');
                             modalWrap.style.opacity = '0';
                             document.body.classList.remove('modal-open');
-                            currentOpenCard.style.transform = 'scale(1)';
+                            currentOpenCard.style.transform = '';
                         }, 400);
                     } else {
                         modalWrap.classList.remove('active-mobile');
@@ -2478,7 +2587,7 @@
                             modalWrap.classList.remove('active');
                             modalWrap.style.opacity = '0';
                             document.body.classList.remove('modal-open');
-                            if(currentOpenCard) currentOpenCard.style.transform = 'scale(1)';
+                            if(currentOpenCard) currentOpenCard.style.transform = '';
                         }, 400);
                     }
                 }
