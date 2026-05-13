@@ -847,285 +847,47 @@
             100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
 
-        /* PORTFOLIO SECTION */
-        .section-portfolio { background-color: var(--bg-main); position: relative; overflow: hidden; }
-        .portfolio-header { text-align: center; margin-bottom: 48px; }
-        .underline-anim { position: relative; display: inline-block; }
-        .underline-anim::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--neon-primary); clip-path: inset(0 100% 0 0); transition: clip-path 0.8s cubic-bezier(0.77,0,0.175,1); transition-delay: 0.3s; }
-        .reveal.active .underline-anim::after { clip-path: inset(0 0 0 0); }
-        .portfolio-subtitle { margin: 24px auto 0; max-width: 560px; }
-
-        /* FILTROS */
-        .portfolio-filters { display: flex; gap: 12px; justify-content: center; margin-bottom: 48px; flex-wrap: wrap; }
+        /* ============================================
+           SE��O AUTORIDADE � substitui #portfolio
+           ============================================ */
+        .section-autoridade {
+            position: relative;
+            padding: clamp(5rem, 10vw, 8rem) 0;
+            overflow: hidden;
+            background-color: var(--bg-main);
+        }
+        .section-autoridade .section-label { text-align: center; margin-bottom: 2rem; }
+        .autoridade-headline { text-align: center; max-width: 820px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+        .autoridade-headline h2 { margin-bottom: 1.25rem; line-height: 1.2; }
+        .highlight-verde { color: var(--neon-primary); text-shadow: 0 0 15px var(--glow-green); }
+        .autoridade-subheadline { font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.7; color: var(--gray-med); max-width: 680px; margin: 0 auto; }
+        .diferenciais-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+        .diferencial-card { background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 2rem 1.5rem; border-radius: 12px; position: relative; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s, box-shadow 0.3s; }
+        .diferencial-card:hover { transform: translateY(-4px); border-color: var(--border-glow); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px var(--glow-green); }
+        .diferencial-icone { font-size: 1.75rem; margin-bottom: 1rem; color: var(--neon-primary); line-height: 1; }
+        .diferencial-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; letter-spacing: 0.02em; color: var(--white); }
+        .diferencial-card p { font-size: 0.9rem; line-height: 1.65; color: var(--gray-med); }
+        .prova-social-compacta { display: flex; align-items: center; justify-content: center; gap: 3rem; max-width: 900px; margin: 0 auto 4rem; padding: 2.5rem 2rem; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--border-subtle); }
+        .prova-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center; }
+        .prova-item strong { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; color: var(--neon-primary); }
+        .prova-item span { font-size: 0.8rem; color: var(--gray-med); text-transform: uppercase; letter-spacing: 0.1em; }
+        .prova-divisor { width: 1px; height: 48px; background: var(--border-subtle); }
+        .autoridade-cta { display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; padding: 0 1.5rem; }
+        .cta-pretexto { font-size: 1rem; color: var(--gray-med); margin: 0; }
+        .cta-micro-detalhe { font-size: 0.8rem; color: var(--gray-med); letter-spacing: 0.05em; }
+        @media (max-width: 1024px) { .diferenciais-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
-            .portfolio-filters { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
-            .portfolio-filters::-webkit-scrollbar { display: none; }
+            .diferenciais-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .prova-social-compacta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; text-align: center; }
+            .prova-divisor { display: none; }
+            .autoridade-headline h2 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
         }
-        .filter-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--gray-med); border-radius: 999px; padding: 8px 20px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
-        .filter-btn.active, .filter-btn:hover { background: rgba(0,255,135,0.12); border-color: rgba(0,255,135,0.4); color: var(--neon-primary); }
-
-        /* GRID E CARDS */
-        /* CAROUSEL GRID E CARDS */
-        .portfolio-grid-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; }
-        .portfolio-dynamic-light { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; transition: background 0.1s; }
-        .portfolio-grid { 
-            display: flex; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            gap: 24px; 
-            padding: 40px calc(50vw - 200px);
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            scroll-behavior: smooth;
-            position: relative; z-index: 1; 
-        }
-        .portfolio-grid::-webkit-scrollbar { display: none; }
-        
-        .port-card { 
-            background: var(--bg-card); 
-            border: 1px solid var(--border-subtle); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            position: relative; 
-            height: 480px; 
-            flex: 0 0 400px;
-            scroll-snap-align: center;
-            transform: scale(0.9);
-            opacity: 0.5;
-            will-change: transform, opacity; 
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease; 
-        }
-        .port-card.carousel-active {
-            transform: scale(1.05);
-            opacity: 1;
-            z-index: 10;
-        }
-        @media (max-width: 768px) { 
-            .portfolio-grid { padding: 40px calc(50vw - 150px); }
-            .port-card { flex: 0 0 300px; height: 420px; } 
-        }
-        
-        .port-card.featured { animation: none; flex: 0 0 500px; height: 480px; }
-        @media (max-width: 992px) { .port-card.featured { flex: 0 0 400px; } }
-        @media (max-width: 768px) { .port-card.featured { flex: 0 0 300px; height: 420px; display: flex; flex-direction: column; } }
-        
-        /* Carousel Nav */
-        .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 32px;
-            margin-bottom: 40px;
-        }
-        .c-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(0,255,135,0.2);
-            color: var(--neon-primary);
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .c-btn:hover {
-            background: rgba(0,255,135,0.1);
-            box-shadow: 0 0 15px rgba(0,255,135,0.3);
-            transform: scale(1.1);
-        }
-
-        /* FEATURED CONTENT */
-        .featured-content { display: flex; height: 100%; }
-        .feat-left { width: 40%; padding: 48px; display: flex; flex-direction: column; justify-content: center; }
-        .feat-right { width: 60%; position: relative; overflow: hidden; }
-        @media (max-width: 768px) {
-            .featured-content { flex-direction: column; }
-            .feat-left, .feat-right { width: 100%; }
-            .feat-left { padding: 32px; order: 2; }
-            .feat-right { height: 240px; order: 1; }
-        }
-        .badge-special { background: rgba(0,255,135,0.1); border: 1px solid rgba(0,255,135,0.3); color: var(--neon-primary); padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; border-radius: 999px; align-self: flex-start; margin-bottom: 24px; animation: glow-border-pulse 2s infinite; }
-        @keyframes glow-border-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,135,0.2); } 50% { box-shadow: 0 0 10px 2px rgba(0,255,135,0.4); } }
-
-        /* CARD MOCKUPS (NO IMAGES) */
-        .mockup-wrap { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background: #111; z-index: 1; pointer-events: none; }
-        .mockup-nav { height: 32px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: absolute; top: 10%; width: 100%; z-index: 10; }
-        .mockup-dots { display: flex; gap: 4px; }
-        .mockup-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); }
-        .mockup-lines { display: flex; gap: 8px; }
-        .mockup-line { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.2); }
-        .mockup-hero { height: 100%; position: relative; display: flex; flex-direction: column; padding: calc(10% + 32px) 16px 32px; }
-        
-        /* THEMES */
-        .theme-clinica .mockup-hero { background: linear-gradient(135deg, #1a1515, #2d2424); align-items: center; text-align: center; }
-        .theme-clinica .m-title { width: 60%; height: 12px; background: #e8d5c4; border-radius: 4px; margin-bottom: 12px; }
-        .theme-clinica .m-sub { width: 40%; height: 6px; background: rgba(232,213,196,0.6); border-radius: 3px; }
-        
-        .theme-restaurante .mockup-hero { background: linear-gradient(to bottom, #000, #1a0a0a); justify-content: center; align-items: center; }
-        .theme-restaurante .m-title { width: 50%; height: 16px; background: #d4af37; border-radius: 2px; margin-bottom: 16px; border: 1px solid rgba(212,175,55,0.3); }
-        
-        .theme-moda .mockup-hero { background: #fff; justify-content: center; align-items: center; }
-        .theme-moda .m-title { width: 70%; height: 2px; background: #000; margin-bottom: 24px; }
-        .theme-moda .m-box { width: 100px; height: 140px; background: #f0f0f0; }
-        
-        .theme-advocacia .mockup-hero { background: #0a1128; padding-top: calc(10% + 40px); }
-        .theme-advocacia .m-title { width: 80%; height: 14px; background: #fff; margin-bottom: 12px; }
-        .theme-advocacia .m-title2 { width: 60%; height: 14px; background: #d4af37; margin-bottom: 24px; }
-        
-        .theme-logistica .mockup-hero { background: #1c2331; }
-        .theme-logistica .m-grid { display: flex; gap: 8px; margin-top: 24px; }
-        .theme-logistica .m-card { flex: 1; height: 60px; background: rgba(255,255,255,0.05); border-left: 2px solid #ff7b00; }
-        
-        .theme-imobiliaria .mockup-hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), #2a2a2a; justify-content: flex-end; }
-        .theme-imobiliaria .m-search { width: 100%; height: 32px; background: #fff; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; }
-        .theme-imobiliaria .m-btn { width: 40px; height: 16px; background: #10b981; border-radius: 2px; margin-left: auto; }
-        
-        .theme-academia .mockup-hero { background: #000; overflow: hidden; }
-        .theme-academia .m-title { width: 80%; height: 24px; background: #e50914; transform: skewY(-5deg); margin: 40px 0 0 20px; }
-        
-        .theme-corp .mockup-hero { background: #070b19; background-image: radial-gradient(rgba(0,255,255,0.1) 1px, transparent 1px); background-size: 10px 10px; }
-        .theme-corp .m-chart { width: 100%; height: 80px; border-bottom: 1px solid rgba(0,255,255,0.2); position: relative; margin-top: 40px; display: flex; align-items: flex-end; gap: 4px; padding: 0 10px; }
-        .theme-corp .m-bar { width: 12px; background: rgba(0,255,255,0.5); }
-
-        /* OVERLAYS E HOVER EFFECTS */
-        .port-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%); z-index: 2; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
-        .port-tag { position: absolute; top: 16px; left: 16px; background: rgba(0,255,135,0.1); border: 1px solid rgba(0,255,135,0.3); color: var(--neon-primary); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.1em; }
-        .port-name { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 600; color: #fff; }
-        
-        .port-hover-ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events: none; }
-        .ph-badge { color: var(--neon-primary); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; transform: translateY(10px); transition: all 0.4s; opacity: 0; }
-        .ph-title { font-family: 'Syne'; font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 24px; transform: translateY(10px); transition: all 0.4s; transition-delay: 0.08s; opacity: 0; }
-        .ph-btn { border: 1px solid var(--neon-primary); color: var(--neon-primary); padding: 10px 24px; border-radius: 999px; font-size: 14px; font-weight: 600; transform: translateY(10px); transition: all 0.4s; transition-delay: 0.16s; opacity: 0; }
-        
-        @media (min-width: 769px) {
-            .port-card:not(.featured):hover { transform: translateY(-6px) scale(1.02); border-color: rgba(0,255,135,0.5); box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 40px rgba(0,255,135,0.12); z-index: 10; }
-            .port-card:not(.featured):hover .port-hover-ui { opacity: 1; }
-            .port-card:not(.featured):hover .ph-badge, .port-card:not(.featured):hover .ph-title, .port-card:not(.featured):hover .ph-btn { transform: translateY(0); opacity: 1; }
-        }
-        @media (max-width: 768px) {
-            .port-card:not(.featured):active { transform: scale(1.02); border-color: var(--neon-primary); box-shadow: 0 0 20px rgba(0,255,135,0.2); }
-        }
-
-        /* CREDIBILITY BAR */
-        .credibility-bar { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 64px; padding-top: 64px; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
-        .cred-item { font-size: 14px; color: var(--gray-med); letter-spacing: 0.05em; display: flex; align-items: center; gap: 24px; }
-        .cred-item:not(:last-child)::after { content: ''; width: 1px; height: 16px; background: rgba(255,255,255,0.08); }
-        @media (max-width: 768px) {
-            .cred-item { flex-direction: column; gap: 8px; text-align: center; }
-            .cred-item:not(:last-child)::after { width: 32px; height: 1px; margin: 8px 0; }
-        }
-
-        /* CTA PORTFOLIO */
-        .port-cta-wrap { text-align: center; margin-top: 80px; }
-        .port-cta-wrap .subtitle { margin-bottom: 32px; }
-
-        /* PORTFOLIO ENHANCEMENTS */
-        .port-card { cursor: none; perspective: 1000px; }
-        .port-preview-badge { position: absolute; bottom: 24px; right: 24px; z-index: 4; background: rgba(0,255,135,0.12); border: 1px solid rgba(0,255,135,0.4); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--neon-primary); font-weight: 600; opacity: 0; transform: translateY(8px); transition: all 0.4s; pointer-events: none; }
-        .port-progress { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--neon-primary); width: 0%; z-index: 5; pointer-events: none; }
-        @media (min-width: 769px) {
-            .port-card:hover { box-shadow: inset 0 0 30px rgba(0,255,135,0.05), 0 24px 60px rgba(0,0,0,0.6), 0 0 40px rgba(0,255,135,0.12); z-index: 10; }
-            .port-card:hover .port-preview-badge { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
-            .port-card:hover .port-progress { width: 100%; transition: width 0.6s linear; }
-        }
-        
-        /* CUSTOM CURSOR UPDATE */
-        .custom-cursor { transition: width 0.3s, height 0.3s, background 0.3s; }
-        .custom-cursor.cursor-open { width: 60px; height: 60px; background: var(--neon-primary); border: none; mix-blend-mode: normal; }
-        .custom-cursor.cursor-open::after { content: 'ABRIR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #000; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; }
-
-        /* MODAL PREVIEW */
-        .preview-modal-wrap { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.95); backdrop-filter: blur(24px); display: none; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
-        .preview-modal-wrap.active { display: block; pointer-events: auto; }
-        .preview-modal-content { position: absolute; background: #080808; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; will-change: clip-path, transform, opacity; }
-        @media (min-width: 769px) { .preview-modal-content { inset: 0; width: 100%; height: 100%; border-radius: 0; transition: clip-path 0.4s cubic-bezier(0.77,0,0.175,1); } }
-        @media (max-width: 768px) { .preview-modal-content { inset: 0; border-radius: 0; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); } .preview-modal-wrap.active-mobile .preview-modal-content { transform: translateY(0); } }
-        
-        /* MODAL TOPBAR */
-        .pm-topbar { height: 52px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; flex-shrink: 0; z-index: 10; position: relative; }
-        .pm-top-left { display: flex; align-items: center; gap: 12px; }
-        .pm-badge { background: rgba(0,255,135,0.1); border: 1px solid rgba(0,255,135,0.3); color: var(--neon-primary); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.1em; }
-        .pm-title-txt { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: #fff; }
-        .pm-mac-dots { display: flex; gap: 6px; }
-        .pm-mac-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .pm-mac-dot.red { background: #ff5f56; }
-        .pm-mac-dot.yellow { background: #ffbd2e; }
-        .pm-mac-dot.green { background: #27c93f; }
-        .pm-url-fake { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 16px; color: #888; font-size: 13px; font-family: 'Inter', sans-serif; flex: 1; text-align: center; max-width: 400px; margin: 0 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .pm-top-right { display: flex; align-items: center; gap: 16px; }
-        .pm-btn-close { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; transition: color 0.3s; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; }
-        .pm-btn-close:hover { color: #ff5f56; background: rgba(255,255,255,0.1); }
-        .pm-btn-cta { background: var(--neon-primary); color: #000; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.3s; }
-        .pm-btn-cta:hover { opacity: 0.8; }
-        @media (max-width: 768px) { .pm-mac-dots, .pm-btn-cta, .pm-url-fake { display: none; } }
-
-        /* MODAL LOADING */
-        .pm-loading { position: absolute; inset: 0; background: #080808; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s; }
-        .pm-loading img { width: 80px; height: 80px; object-fit: contain; animation: spin 10s linear infinite, glow-pulse 2.5s infinite; margin-bottom: 32px; filter: drop-shadow(0 0 15px rgba(0,255,135,0.5)); }
-        .pm-loading-bar-wrap { width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; margin-bottom: 16px; }
-        .pm-loading-bar { width: 0%; height: 100%; background: var(--neon-primary); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
-        .pm-loading-text { font-family: 'Inter', sans-serif; font-size: 13px; color: #888; }
-        @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
-        .pm-loading-text::after { content: ''; display: inline-block; animation: dots 1.5s infinite; width: 12px; text-align: left; }
-
-        /* MODAL PREVIEW AREA (SIMULATED SITE) */
-        .pm-preview-area { height: calc(100vh - 52px); height: calc(100dvh - 52px); display: block; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0,255,135,0.3) transparent; position: relative; background: #000; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; z-index: 20; }
-        .pm-preview-area.loaded { opacity: 1; transform: translateY(0); }
-        .pm-preview-area::-webkit-scrollbar { width: 8px; }
-        .pm-preview-area::-webkit-scrollbar-track { background: transparent; }
-        .pm-preview-area::-webkit-scrollbar-thumb { background-color: rgba(0,255,135,0.3); border-radius: 4px; }
-        
-        .sim-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 24px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 10; transition: background 0.3s, padding 0.3s; }
-        .sim-navbar.scrolled { background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 16px 5%; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sim-logo { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; color: #fff; }
-        .sim-nav-links { display: flex; gap: 24px; }
-        .sim-nav-link { width: 40px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 3px; }
-        .sim-btn { background: #fff; color: #000; padding: 12px 24px; border-radius: 999px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; border: none; cursor: pointer; transition: transform 0.3s; }
-        .sim-btn:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { .sim-nav-links { display: none; } }
-        
-        .sim-hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; position: relative; }
-        .sim-hero-content { max-width: 800px; position: relative; z-index: 2; }
-        .sim-h1 { font-family: 'Syne', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 24px; }
-        .sim-p { font-family: 'Inter', sans-serif; font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.6; max-width: 600px; }
-        .sim-hero-btns { display: flex; gap: 16px; }
-        .sim-btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 999px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 14px; cursor: pointer; transition: border-color 0.3s; }
-        .sim-btn-outline:hover { border-color: #fff; }
-        
-        .sim-section { padding: 100px 5%; background: #080808; }
-        .sim-section.alt { background: #0a0a0a; }
-        .sim-sec-title { width: 300px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 8px; margin-bottom: 64px; }
-        .sim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-        .sim-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; transition: transform 0.3s, background 0.3s; }
-        .sim-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); }
-        .sim-icon { width: 60px; height: 60px; border-radius: 16px; background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent); margin-bottom: 24px; }
-        .sim-card-title { width: 60%; height: 20px; background: rgba(255,255,255,0.8); border-radius: 4px; margin-bottom: 16px; }
-        .sim-card-text { width: 100%; height: 8px; background: rgba(255,255,255,0.4); border-radius: 4px; margin-bottom: 8px; }
-        .sim-card-text.short { width: 80%; }
-        
-        .sim-testim { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px; margin: 0 auto; }
-        .sim-avatar { width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(0,0,0,0.5)); margin-bottom: 32px; }
-        .sim-quote { font-family: 'Syne', sans-serif; font-size: 24px; color: #fff; line-height: 1.5; margin-bottom: 24px; }
-        .sim-author { width: 120px; height: 12px; background: rgba(255,255,255,0.5); border-radius: 6px; }
-        
-        .sim-footer { padding: 64px 5%; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
-        @media (max-width: 768px) { .sim-footer { flex-direction: column; gap: 32px; text-align: center; } }
-        
-        .sim-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
-        .sim-reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* PAGE BLUR FX */
-        body.modal-open #smooth-wrapper { filter: blur(8px); opacity: 0.3; transition: filter 0.4s, opacity 0.4s; }
-        
-        /* MOBILE FIXED CTA */
-        .pm-mobile-cta { display: none; position: absolute; bottom: 0; left: 0; width: 100%; padding: 16px; background: #080808; border-top: 1px solid rgba(255,255,255,0.1); z-index: 20; }
-        .pm-mobile-cta .pm-btn-cta { display: block; text-align: center; font-size: 16px; padding: 16px; width: 100%; border-radius: 8px; box-sizing: border-box; }
-        @media (max-width: 768px) {
-            .pm-mobile-cta { display: block; }
-            .pm-preview-area { height: calc(100% - 52px - 80px); }
+        @media (max-width: 480px) {
+            .section-autoridade { padding: 4rem 0; }
+            .diferenciais-grid { padding: 0 1rem; gap: 0.875rem; }
+            .diferencial-card { padding: 1.5rem 1.25rem; }
+            .prova-social-compacta { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 1.75rem 1.25rem; margin: 0 1rem 3rem; }
+            .autoridade-cta { padding: 0 1rem; }
         }
         /* V2 - GLOBAL ATMOSPHERE & ENTRANCE */
         .v2-grid-pattern {
@@ -1339,34 +1101,6 @@
         <a href="https://wa.me/5519983455526?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais!" target="_blank" class="mobile-cta">Iniciar Projeto</a>
     </div>
 
-    <!-- PREVIEW MODAL -->
-    <div class="preview-modal-wrap" id="preview-modal">
-        <div class="preview-modal-content" id="pm-content">
-            <div class="pm-topbar">
-                <div class="pm-top-left">
-                    <div class="pm-mac-dots"><div class="pm-mac-dot red"></div><div class="pm-mac-dot yellow"></div><div class="pm-mac-dot green"></div></div>
-                    <div class="pm-badge" id="pm-badge">Categoria</div>
-                    <div class="pm-title-txt" id="pm-title">Template Name</div>
-                </div>
-                <div class="pm-url-fake" id="pm-url">preview.converte.digital/template</div>
-                <div class="pm-top-right">
-                    <a href="#" target="_blank" class="pm-btn-cta" id="pm-cta">Quero esse →</a>
-                    <button class="pm-btn-close" id="pm-close">✕</button>
-                </div>
-            </div>
-            <div class="pm-loading" id="pm-loading">
-                <img src="cdcd/logo.pmg" alt="Loading" onerror="this.src='./cdcd/logo.pmg'; this.onerror=null;">
-                <div class="pm-loading-bar-wrap"><div class="pm-loading-bar" id="pm-loading-bar"></div></div>
-                <div class="pm-loading-text">Carregando preview</div>
-            </div>
-            <div class="pm-preview-area" id="pm-preview-area">
-                <!-- Injected via JS -->
-            </div>
-            <div class="pm-mobile-cta">
-                <a href="#" target="_blank" class="pm-btn-cta" id="pm-cta-mobile">Quero esse site →</a>
-            </div>
-        </div>
-    </div>
 
     <!-- SMOOTH SCROLL WRAPPER -->
     <div id="smooth-wrapper">
@@ -1414,229 +1148,75 @@
                 </div>
             </section>
 
-            <!-- PORTFOLIO -->
-            <section id="portfolio" class="section-portfolio">
+            <!-- PORTFOLIO / AUTORIDADE -->
+            <section id="portfolio" class="section-autoridade">
                 <div class="container">
-                    <div class="portfolio-header reveal">
-                        <div class="badge" style="background: rgba(0,255,135,0.08); border-color: rgba(0,255,135,0.25);">✦ Portfólio</div>
-                        <h2 class="title-section" style="margin-bottom: 0;">Sites que impressionam.<br><span class="underline-anim">Resultados que comprovam.</span></h2>
-                        <p class="portfolio-subtitle subtitle">Cada projeto é desenvolvido sob medida, com design exclusivo e foco total em conversão. Veja alguns exemplos do nosso trabalho.</p>
+                    <div class="section-label reveal">
+                        <div class="badge" style="background: rgba(0,255,135,0.08); border-color: rgba(0,255,135,0.25);">? Nossa Entrega</div>
                     </div>
 
-                    <div class="portfolio-filters reveal delay-100" style="display:none;">
-                        <button class="filter-btn active" data-filter="todos">Todos</button>
-                        <button class="filter-btn" data-filter="clinica">Clínica</button>
-                        <button class="filter-btn" data-filter="restaurante">Restaurante</button>
-                        <button class="filter-btn" data-filter="moda">Moda</button>
-                        <button class="filter-btn" data-filter="advocacia">Advocacia</button>
-                        <button class="filter-btn" data-filter="logistica">Logística</button>
-                        <button class="filter-btn" data-filter="imobiliaria">Imobiliária</button>
-                        <button class="filter-btn" data-filter="academia">Academia</button>
-                        <button class="filter-btn" data-filter="corporativo">Corporativo</button>
+                    <div class="autoridade-headline reveal delay-100">
+                        <h2 class="title-section">
+                            Criamos experi�ncias digitais que<br>
+                            <span class="highlight-verde">posicionam marcas em outro n�vel.</span>
+                        </h2>
+                        <p class="autoridade-subheadline">
+                            Mais do que sites. Desenvolvemos presen�a digital com percep��o premium � design estrat�gico, tecnologia s�lida e identidade que comunica autoridade antes mesmo do primeiro contato.
+                        </p>
                     </div>
 
-                    <div class="portfolio-grid-wrap">
-                        <div class="portfolio-dynamic-light"></div>
-                        <div class="portfolio-grid">
-                            
-                            <!-- FEATURED: CLINICA -->
-                            <div class="port-card featured theme-clinica" data-category="clinica">
-                                <div class="featured-content">
-                                    <div class="feat-left">
-                                        <div class="badge-special">✦ Projeto em destaque</div>
-                                        <h3 class="syne" style="font-size: 32px; margin-bottom: 16px; color: #fff;">Lumière Estética Avançada</h3>
-                                        <p class="body-text" style="margin-bottom: 24px;">Design sofisticado em tons de rose gold com foco total em agendamentos pelo WhatsApp e conversão de pacientes de alto padrão.</p>
-                                        <a href="https://wa.me/5519983455526?text=Olá%2C%20vi%20os%20exemplos%20de%20sites%20e%20quero%20saber%20mais!" target="_blank" class="btn-secondary hover-btn" style="align-self: flex-start; padding: 12px 24px; font-size: 14px;">Quero um site assim</a>
-                                    </div>
-                                    <div class="feat-right">
-                                        <div class="mockup-wrap">
-                                            <div class="mockup-nav">
-                                                <div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
-                                                <div class="mockup-lines"><div class="mockup-line" style="width:20px;"></div><div class="mockup-line" style="width:20px;"></div></div>
-                                            </div>
-                                            <div class="mockup-hero">
-                                                <div class="m-title" style="width: 50%; height: 20px;"></div>
-                                                <div class="m-title" style="width: 70%; height: 20px;"></div>
-                                                <div class="m-sub" style="margin-top: 20px;"></div>
-                                                <div class="m-sub" style="margin-top: 8px;"></div>
-                                                <div class="m-title" style="margin-top: 32px; width: 100px; height: 32px; border-radius: 16px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 2: RESTAURANTE -->
-                            <div class="port-card reveal delay-100 theme-restaurante" data-category="restaurante">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div class="m-title"></div>
-                                        <div class="m-title" style="width:30%; height:4px; background:#888; border:none;"></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Restaurante</div>
-                                    <div class="port-name">Osteria Del Porto</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Restaurante</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 3: MODA -->
-                            <div class="port-card reveal delay-200 theme-moda" data-category="moda">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav" style="border-bottom-color: rgba(0,0,0,0.1);"><div class="mockup-dots"><div class="mockup-dot" style="background:#000;"></div><div class="mockup-dot" style="background:#000;"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div class="m-title"></div>
-                                        <div class="m-box"></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Moda</div>
-                                    <div class="port-name">Maison Verônica</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Moda</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 4: ADVOCACIA -->
-                            <div class="port-card reveal delay-300 theme-advocacia" data-category="advocacia">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-lines"><div class="mockup-line" style="width:30px;"></div><div class="mockup-line" style="width:10px;"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div class="m-title"></div>
-                                        <div class="m-title2"></div>
-                                        <div style="width:30%; height:2px; background:rgba(255,255,255,0.2); margin-top:20px;"></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Advocacia</div>
-                                    <div class="port-name">Costa & Associados</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Advocacia</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 5: LOGÍSTICA -->
-                            <div class="port-card reveal delay-100 theme-logistica" data-category="logistica">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div style="width:40%; height:10px; background:#ff7b00; margin-bottom:12px;"></div>
-                                        <div style="width:60%; height:6px; background:#fff;"></div>
-                                        <div class="m-grid"><div class="m-card"></div><div class="m-card"></div></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Logística</div>
-                                    <div class="port-name">LogisPro Transportes</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Logística</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 6: IMOBILIÁRIA -->
-                            <div class="port-card reveal delay-200 theme-imobiliaria" data-category="imobiliaria">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-lines"><div class="mockup-line" style="width:40px;"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div style="width:70%; height:16px; background:#fff; margin-bottom:24px;"></div>
-                                        <div class="m-search"><div class="m-btn"></div></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Imobiliária</div>
-                                    <div class="port-name">Vertex Imóveis Premium</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Imobiliária</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 7: ACADEMIA -->
-                            <div class="port-card reveal delay-300 theme-academia" data-category="academia">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div class="m-title"></div>
-                                        <div class="m-title" style="width:60%; margin-top:8px;"></div>
-                                        <div style="width:80px; height:24px; background:#fff; transform:skewY(-5deg); margin: 30px 0 0 20px;"></div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Academia</div>
-                                    <div class="port-name">APEX Training Center</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Academia</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
-                            <!-- CARD 8: CORPORATIVO -->
-                            <div class="port-card reveal delay-100 theme-corp" data-category="corporativo">
-                                <div class="mockup-wrap">
-                                    <div class="mockup-nav"><div class="mockup-lines"><div class="mockup-line" style="width:20px;"></div><div class="mockup-line" style="width:20px;"></div></div></div>
-                                    <div class="mockup-hero">
-                                        <div style="width:50%; height:12px; background:#0ff; margin-bottom:8px;"></div>
-                                        <div style="width:80%; height:8px; background:rgba(255,255,255,0.4);"></div>
-                                        <div class="m-chart">
-                                            <div class="m-bar" style="height:30%;"></div>
-                                            <div class="m-bar" style="height:50%;"></div>
-                                            <div class="m-bar" style="height:80%;"></div>
-                                            <div class="m-bar" style="height:40%;"></div>
-                                            <div class="m-bar" style="height:90%;"></div>
-                                            <div class="m-bar" style="height:60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="port-overlay">
-                                    <div class="port-tag">Corporativo</div>
-                                    <div class="port-name">Nexus Corp Solutions</div>
-                                </div>
-                                <div class="port-hover-ui">
-                                    <div class="ph-badge">Template Premium</div>
-                                    <div class="ph-title">Corporativo</div>
-                                    <div class="ph-btn">Ver detalhes →</div>
-                                </div>
-                            </div>
-
+                    <div class="diferenciais-grid">
+                        <div class="diferencial-card reveal delay-100 glass-card">
+                            <div class="diferencial-icone">?</div>
+                            <h3 class="syne">Design Exclusivo por Projeto</h3>
+                            <p>Nenhum projeto replica o anterior. Cada entrega � desenvolvida do zero, com identidade visual constru�da especificamente para a sua marca.</p>
                         </div>
-                        
-                        <div class="carousel-nav reveal delay-200">
-                            <button class="c-btn c-prev">←</button>
-                            <button class="c-btn c-next">→</button>
+                        <div class="diferencial-card reveal delay-200 glass-card">
+                            <div class="diferencial-icone">?</div>
+                            <h3 class="syne">Estrat�gia de Posicionamento</h3>
+                            <p>Cada decis�o de design carrega inten��o estrat�gica. Constru�mos presen�a digital que comunica autoridade e converte visitantes em clientes.</p>
+                        </div>
+                        <div class="diferencial-card reveal delay-300 glass-card">
+                            <div class="diferencial-icone">?</div>
+                            <h3 class="syne">Tecnologia de Performance</h3>
+                            <p>Arquitetura t�cnica moderna, velocidade de carregamento otimizada e experi�ncia fluida em todos os dispositivos � sem concess�es.</p>
+                        </div>
+                        <div class="diferencial-card reveal delay-400 glass-card">
+                            <div class="diferencial-icone">?</div>
+                            <h3 class="syne">Entrega em Tempo Recorde</h3>
+                            <p>Processos refinados que eliminam burocracia e garantem que sua presen�a digital entre no ar antes do que qualquer concorrente esperaria.</p>
                         </div>
                     </div>
 
-                    <div class="credibility-bar reveal delay-200">
-                        <div class="cred-item">Design 100% exclusivo</div>
-                        <div class="cred-item">Nunca usamos templates</div>
-                        <div class="cred-item">Cada site único</div>
+                    <div class="prova-social-compacta reveal delay-200">
+                        <div class="prova-item">
+                            <strong>+47</strong>
+                            <span>Marcas atendidas</span>
+                        </div>
+                        <div class="prova-divisor"></div>
+                        <div class="prova-item">
+                            <strong>100%</strong>
+                            <span>Aprova��o antes do investimento</span>
+                        </div>
+                        <div class="prova-divisor"></div>
+                        <div class="prova-item">
+                            <strong>48h</strong>
+                            <span>Para o primeiro resultado</span>
+                        </div>
+                        <div class="prova-divisor"></div>
+                        <div class="prova-item">
+                            <strong>5?</strong>
+                            <span>Avalia��o m�dia dos clientes</span>
+                        </div>
                     </div>
 
-                    <div class="port-cta-wrap reveal delay-300">
-                        <h3 class="syne" style="font-size: 32px; color: #fff; margin-bottom: 12px;">Quer um site assim para o seu negócio?</h3>
-                        <p class="subtitle">Fale com a gente agora. Seu site pode estar pronto antes do que você imagina.</p>
-                        <a href="https://wa.me/5519983455526?text=Olá%2C%20vi%20os%20exemplos%20de%20sites%20e%20quero%20saber%20mais!" target="_blank" class="btn-primary hover-btn">
-                            QUERO MEU SITE AGORA →
+                    <div class="autoridade-cta reveal delay-300">
+                        <p class="cta-pretexto">Sua marca est� pronta para um padr�o digital diferente.</p>
+                        <a href="https://wa.me/5519983455526?text=Ol�%2C%20vim%20pelo%20site%20e%20quero%20elevar%20minha%20presen�a%20digital." class="btn-primary hover-btn v2-btn-advanced" target="_blank" rel="noopener noreferrer">
+                            <span class="v2-btn-text">Quero elevar minha presen�a digital</span>
+                            <span class="v2-btn-icon">?</span>
                         </a>
+                        <span class="cta-micro-detalhe">Sem formul�rios � Resposta em at� 5 minutos</span>
                     </div>
                 </div>
             </section>
@@ -2308,352 +1888,6 @@
                 document.getElementById('wa-float').classList.add('visible');
             }, 2000);
             
-            // PORTFOLIO FILTERS & PARALLAX & MODAL
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const portCards = document.querySelectorAll('.port-card');
-            const portGrid = document.querySelector('.portfolio-grid');
-            const cPrev = document.querySelector('.c-prev');
-            const cNext = document.querySelector('.c-next');
-
-            if(portGrid && portCards.length > 0) {
-                // Configura observer para a classe active do carrossel
-                const observerOptions = {
-                    root: portGrid,
-                    rootMargin: '0px',
-                    threshold: 0.6
-                };
-
-                const carouselObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('carousel-active');
-                        } else {
-                            entry.target.classList.remove('carousel-active');
-                        }
-                    });
-                }, observerOptions);
-
-                portCards.forEach(card => {
-                    carouselObserver.observe(card);
-                });
-
-                // Set focus to the second card initially because the first is "featured" and larger
-                setTimeout(() => {
-                    if (portCards[1]) {
-                        portGrid.scrollTo({
-                            left: portCards[1].offsetLeft - (window.innerWidth / 2) + (portCards[1].offsetWidth / 2),
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 1000);
-
-                // Navegação setas
-                if(cPrev && cNext) {
-                    cNext.addEventListener('click', () => {
-                        portGrid.scrollBy({ left: window.innerWidth > 768 ? 424 : 324, behavior: 'smooth' });
-                    });
-                    cPrev.addEventListener('click', () => {
-                        portGrid.scrollBy({ left: window.innerWidth > 768 ? -424 : -324, behavior: 'smooth' });
-                    });
-                }
-            }
-            
-            const modalWrap = document.getElementById('preview-modal');
-            const modalContent = document.getElementById('pm-content');
-            const btnClose = document.getElementById('pm-close');
-            const pmBadge = document.getElementById('pm-badge');
-            const pmTitle = document.getElementById('pm-title');
-            const pmUrl = document.getElementById('pm-url');
-            const pmLoading = document.getElementById('pm-loading');
-            const pmLoadingBar = document.getElementById('pm-loading-bar');
-            const pmPreviewArea = document.getElementById('pm-preview-area');
-            const pmCta = document.getElementById('pm-cta');
-            const pmCtaMobile = document.getElementById('pm-cta-mobile');
-            let currentOpenCard = null;
-
-            const siteData = {
-                clinica: { name: 'Lumière Estética Avançada', logo: 'Lumière', bg: '#1a0a12', accent: '#e8b4c0', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #2d1520, #1a0a12)', h1: 'Beleza que transforma. Cuidado que permanece.', sub: 'Procedimentos premium de estética avançada para realçar sua beleza natural com tecnologia de ponta.', btn: 'Agendar Consulta', services: ['Botox', 'Preenchimento', 'Limpeza de Pele'] },
-                restaurante: { name: 'Osteria Del Porto', logo: 'Osteria', bg: '#0a0800', accent: '#c9a84c', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #1a1200, #0a0800)', h1: 'Uma experiência gastronômica inesquecível.', sub: 'Culinária italiana premium com ingredientes selecionados e ambiente sofisticado.', btn: 'Reservar Mesa', services: ['Almoço Executivo', 'Jantar Especial', 'Eventos'] },
-                moda: { name: 'Maison Verônica', logo: 'MAISON', bg: '#080808', accent: '#ffffff', textColor: '#888', heroGrad: 'linear-gradient(135deg, #141414, #080808)', h1: 'Vista o que você é.', sub: 'Moda exclusiva sob medida para quem busca elegância e personalidade em cada detalhe.', btn: 'Ver Coleção', services: ['Roupas Sob Medida', 'Consultoria de Estilo', 'Acessórios'] },
-                advocacia: { name: 'Costa & Associados', logo: 'Costa & Assoc.', bg: '#050810', accent: '#c9a84c', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #0a1020, #050810)', h1: 'Seu direito defendido com excelência.', sub: 'Atuação jurídica especializada e estratégica para proteger seus interesses com segurança.', btn: 'Consulta Gratuita', services: ['Direito Civil', 'Trabalhista', 'Empresarial'] },
-                logistica: { name: 'LogisPro Transportes', logo: 'LogisPro', bg: '#050810', accent: '#f97316', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #0f1520, #050810)', h1: 'Sua carga no lugar certo. No tempo certo.', sub: 'Soluções logísticas inteligentes com rotas otimizadas e entregas seguras para o seu negócio.', btn: 'Solicitar Frete', services: ['Transporte Nacional', 'Armazenagem', 'Rastreamento'] },
-                imobiliaria: { name: 'Vertex Imóveis Premium', logo: 'VERTEX', bg: '#050a08', accent: '#00c96e', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #0a1510, #050a08)', h1: 'O imóvel dos seus sonhos começa aqui.', sub: 'Um portfólio premium de imóveis exclusivos selecionados para o seu estilo de vida.', btn: 'Ver Imóveis', services: ['Compra', 'Venda', 'Locação Premium'] },
-                academia: { name: 'APEX Training Center', logo: 'APEX', bg: '#0a0505', accent: '#ef4444', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #150808, #0a0505)', h1: 'Supere seus limites. Todo. Dia.', sub: 'Estrutura de alta performance, treinos personalizados e resultados reais para a sua evolução.', btn: 'Começar Agora', services: ['Musculação', 'Funcional', 'Nutrição'] },
-                corporativo: { name: 'Nexus Corp Solutions', logo: 'NEXUS', bg: '#050810', accent: '#00e5ff', textColor: '#fff', heroGrad: 'linear-gradient(135deg, #080f20, #050810)', h1: 'Tecnologia que impulsiona resultados reais.', sub: 'Soluções empresariais inovadoras e estratégicas para transformar o futuro da sua empresa.', btn: 'Falar com Especialista', services: ['Consultoria', 'Tecnologia', 'Estratégia'] }
-            };
-
-            function getTemplateHTML(nicho) {
-                const data = siteData[nicho];
-                if (!data) return '';
-
-                const btnTextColor = data.accent === '#ffffff' ? '#000000' : '#ffffff';
-                const darkerBg = data.bg === '#080808' ? '#040404' : (data.bg === '#050810' ? '#020408' : '#000000');
-                const footerBg = darkerBg === '#000000' ? '#000000' : darkerBg;
-
-                return `
-                    <style>
-                        .sim-tpl { font-family: 'Inter', sans-serif; background: ${data.bg}; color: ${data.textColor}; min-height: 100dvh; overflow-x: hidden; position:relative; }
-                        .sim-tpl * { margin:0; padding:0; box-sizing:border-box; }
-                        .sim-tpl-nav { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 100; background: ${data.bg}f2; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-                        .sim-tpl-logo { font-size: 20px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; }
-                        .sim-tpl-links { display: flex; gap: 24px; }
-                        .sim-tpl-link { color: ${data.textColor}; text-decoration: none; font-size: 14px; opacity: 0.8; }
-                        .sim-tpl-hero { min-height: 100dvh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 40px; background: ${data.heroGrad}; }
-                        .sim-tpl-h1 { font-size: 52px; font-weight: 800; line-height: 1.1; color: #ffffff; margin-bottom: 16px; font-family: 'Syne', sans-serif; }
-                        .sim-tpl-sub { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
-                        .sim-tpl-btn { padding: 16px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; cursor: pointer; border: none; transition: all 0.3s ease; background: ${data.accent}; color: ${btnTextColor}; display: inline-block; text-decoration: none; }
-                        .sim-tpl-btn:hover { transform: translateY(-2px); opacity: 0.9; }
-                        .sim-tpl-services { padding: 80px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; background: ${darkerBg}; }
-                        .sim-tpl-card { padding: 32px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-align: center; }
-                        .sim-tpl-card h3 { font-family: 'Syne', sans-serif; margin-bottom: 12px; }
-                        .sim-tpl-social { padding: 80px 40px; text-align:center; background: ${data.bg}; }
-                        .sim-tpl-footer { padding: 40px; text-align: center; background: ${footerBg}; color: rgba(255,255,255,0.5); font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); padding-bottom:100px; }
-                        @media (max-width: 768px) {
-                            .sim-tpl-h1 { font-size: 32px; }
-                            .sim-tpl-services { grid-template-columns: 1fr; padding: 60px 20px; }
-                            .sim-tpl-nav { padding: 0 20px; }
-                            .sim-tpl-links { display: none; }
-                            .sim-tpl-hero { padding: 60px 20px; min-height: 80vh; }
-                            .sim-tpl-btn { width: 100%; max-width: 300px; margin-bottom: 12px; }
-                        }
-                    </style>
-                    <div class="v2-mac-bar">
-                        <div class="v2-mac-dot r"></div><div class="v2-mac-dot y"></div><div class="v2-mac-dot g"></div>
-                    </div>
-                    <div class="sim-tpl">
-                        <div class="sim-tpl-nav">
-                            <div class="sim-tpl-logo">${data.logo}</div>
-                            <div class="sim-tpl-links">
-                                <a href="#" class="sim-tpl-link">Sobre</a>
-                                <a href="#" class="sim-tpl-link">Serviços</a>
-                                <a href="#" class="sim-tpl-link">Contato</a>
-                            </div>
-                            <a href="https://wa.me/5519983455526" target="_blank" class="sim-tpl-btn" style="padding: 10px 24px; font-size: 13px;">${data.btn}</a>
-                        </div>
-                        <div class="sim-tpl-hero">
-                            <div>
-                                <h1 class="sim-tpl-h1">${data.h1}</h1>
-                                <p class="sim-tpl-sub">${data.sub}</p>
-                                <a href="https://wa.me/5519983455526" target="_blank" class="sim-tpl-btn">${data.btn}</a>
-                            </div>
-                        </div>
-                        <div class="sim-tpl-services">
-                            ${data.services.map((srv, i) => `
-                                <div class="sim-tpl-card">
-                                    <h3 style="color:${data.accent}">${srv}</h3>
-                                    <p style="font-size: 14px; opacity: 0.7; line-height: 1.5;">Soluções especializadas em ${srv.toLowerCase()} para impulsionar o seu negócio com excelência.</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="sim-tpl-social">
-                            <h2 style="font-family:'Syne',sans-serif; font-size:32px; margin-bottom:40px; color:#fff;">Aprovado por nossos clientes</h2>
-                            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-                                <div style="width:300px; padding:24px; background:rgba(255,255,255,0.03); border-radius:12px;">
-                                    <div style="color:${data.accent}; margin-bottom:12px;">★★★★★</div>
-                                    <p style="font-size:14px; opacity:0.8;">"Resultados muito acima da expectativa. A melhor escolha que fizemos."</p>
-                                </div>
-                                <div style="width:300px; padding:24px; background:rgba(255,255,255,0.03); border-radius:12px;">
-                                    <div style="color:${data.accent}; margin-bottom:12px;">★★★★★</div>
-                                    <p style="font-size:14px; opacity:0.8;">"O atendimento e a qualidade do serviço são impecáveis."</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sim-tpl-footer">
-                            &copy; 2026 ${data.name}. Todos os direitos reservados.
-                        </div>
-                        <a href="https://wa.me/5519983455526?text=Olá%2C%20quero%20um%20site%20nesse%20nível!" class="v2-sticky-cta" target="_blank">Quero um site desse nível →</a>
-                    </div>
-                `;
-            }
-
-
-            if(filterBtns.length > 0) {
-                // Prepara os badges e click listener para os modais
-                portCards.forEach(card => {
-                    const badge = document.createElement('div');
-                    badge.className = 'port-preview-badge';
-                    badge.textContent = 'Ver preview →';
-                    const progress = document.createElement('div');
-                    progress.className = 'port-progress';
-                    card.appendChild(badge);
-                    card.appendChild(progress);
-
-                    card.addEventListener('mouseenter', () => {
-                        const customCursor = document.querySelector('.custom-cursor');
-                        if(customCursor) customCursor.classList.add('cursor-open');
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        const customCursor = document.querySelector('.custom-cursor');
-                        if(customCursor) customCursor.classList.remove('cursor-open');
-                    });
-
-                    card.addEventListener('click', (e) => {
-                        if(e.target.closest('a')) return; // ignora botoes links diretos (ex. btn do card destaque)
-                        currentOpenCard = card;
-                        const cat = card.getAttribute('data-category');
-                        const data = siteData[cat];
-                        const cleanCat = cat.charAt(0).toUpperCase() + cat.slice(1);
-                        
-                        pmBadge.textContent = cleanCat;
-                        pmTitle.textContent = data.name;
-                        pmUrl.textContent = `preview.converte.digital/${cat}`;
-                        
-                        const waLinkTop = `https://wa.me/5519983455526?text=Olá%2C%20vi%20o%20template%20e%20quero%20um%20site%20assim!`;
-                        pmCta.href = waLinkTop;
-                        pmCtaMobile.href = waLinkTop;
-
-                        // 1. Mostrar modal primeiro
-                        document.body.classList.add('modal-open');
-                        modalWrap.classList.add('active');
-                        if (window.innerWidth <= 768) {
-                            modalWrap.classList.add('active-mobile');
-                        }
-                        
-                        if(!isMobile) {
-                            card.style.transform = 'scale(1.05)';
-                            const rect = card.getBoundingClientRect();
-                            const vh = window.innerHeight;
-                            const vw = window.innerWidth;
-                            
-                            const t = (rect.top / vh) * 100;
-                            const l = (rect.left / vw) * 100;
-                            const b = ((vh - rect.bottom) / vh) * 100;
-                            const r = ((vw - rect.right) / vw) * 100;
-                            
-                            modalContent.style.transition = 'none';
-                            modalContent.style.clipPath = `inset(${t}% ${r}% ${b}% ${l}% round 20px)`;
-                            modalWrap.style.opacity = '1';
-                            
-                            requestAnimationFrame(() => {
-                                modalContent.style.transition = 'clip-path 0.4s cubic-bezier(0.77,0,0.175,1)';
-                                modalContent.style.clipPath = `inset(0% 0% 0% 0% round 0px)`;
-                            });
-                        } else {
-                            modalWrap.style.opacity = '1';
-                        }
-
-                        pmPreviewArea.style.opacity = '0';
-                        pmLoading.style.opacity = '1';
-                        pmLoading.style.pointerEvents = 'auto';
-                        pmLoadingBar.style.width = '0%';
-                        setTimeout(() => { pmLoadingBar.style.width = '100%'; }, 50);
-
-                        // 2. Inserir o HTML do template após pequeno delay
-                        setTimeout(() => {
-                            pmPreviewArea.innerHTML = getTemplateHTML(cat);
-                            
-                            // 3. Aguardar render e então mostrar
-                            requestAnimationFrame(() => {
-                                requestAnimationFrame(() => {
-                                    pmLoading.style.opacity = '0';
-                                    pmLoading.style.pointerEvents = 'none';
-                                    
-                                    pmPreviewArea.style.opacity = '1';
-                                    pmPreviewArea.style.transform = 'translateY(0)';
-                                    pmPreviewArea.classList.add('loaded');
-                                });
-                            });
-                        }, 400);
-                    });
-                });
-
-                function closeModal() {
-                    pmPreviewArea.classList.remove('loaded');
-                    pmPreviewArea.style.opacity = '0';
-                    pmPreviewArea.style.transform = 'translateY(20px)';
-                    pmLoadingBar.style.width = '0%';
-                    
-                    if(!isMobile && currentOpenCard) {
-                        const rect = currentOpenCard.getBoundingClientRect();
-                        const vh = window.innerHeight;
-                        const vw = window.innerWidth;
-                        
-                        const t = (rect.top / vh) * 100;
-                        const l = (rect.left / vw) * 100;
-                        const b = ((vh - rect.bottom) / vh) * 100;
-                        const r = ((vw - rect.right) / vw) * 100;
-                        
-                        modalContent.style.clipPath = `inset(${t}% ${r}% ${b}% ${l}% round 20px)`;
-                        
-                        setTimeout(() => {
-                            modalWrap.classList.remove('active');
-                            modalWrap.style.opacity = '0';
-                            document.body.classList.remove('modal-open');
-                            currentOpenCard.style.transform = '';
-                        }, 400);
-                    } else {
-                        modalWrap.classList.remove('active-mobile');
-                        setTimeout(() => {
-                            modalWrap.classList.remove('active');
-                            modalWrap.style.opacity = '0';
-                            document.body.classList.remove('modal-open');
-                            if(currentOpenCard) currentOpenCard.style.transform = '';
-                        }, 400);
-                    }
-                }
-
-                btnClose.addEventListener('click', closeModal);
-                modalWrap.addEventListener('click', (e) => { if(e.target === modalWrap) closeModal(); });
-                document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modalWrap.classList.contains('active')) closeModal(); });
-
-                // Filtros Evoluídos
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        
-                        const filter = btn.getAttribute('data-filter');
-                        let delayIndex = 0;
-                        
-                        portCards.forEach(card => {
-                            if(filter === 'todos' || card.getAttribute('data-category') === filter) {
-                                card.style.display = ''; // restabelece fluxo normal CSS
-                                setTimeout(() => {
-                                    card.style.opacity = '1';
-                                    card.style.transform = 'scale(1) rotateX(0deg)';
-                                }, 10 + (delayIndex * 60));
-                                delayIndex++;
-                            } else {
-                                card.style.opacity = '0';
-                                card.style.transform = 'scale(0.9) rotateX(8deg)';
-                                setTimeout(() => {
-                                    card.style.display = 'none';
-                                }, 400);
-                            }
-                        });
-                    });
-                });
-                
-                // Parallax nos mockups Evoluído & Luz do Mouse
-                if(!isMobile) {
-                    const mockups = document.querySelectorAll('.mockup-wrap');
-                    window.addEventListener('scroll', () => {
-                        const scrollY = window.scrollY;
-                        mockups.forEach(m => {
-                            const rect = m.parentElement.getBoundingClientRect();
-                            if(rect.top < window.innerHeight && rect.bottom > 0) {
-                                m.style.transform = `translateY(${(rect.top - window.innerHeight/2) * 0.12}px)`;
-                                Array.from(m.children).forEach(child => {
-                                    child.style.transform = `translateY(${(rect.top - window.innerHeight/2) * 0.04}px)`;
-                                });
-                            }
-                        });
-                    });
-                    
-                    const portGridWrap = document.querySelector('.portfolio-grid-wrap');
-                    const dynamicLight = document.querySelector('.portfolio-dynamic-light');
-                    if(portGridWrap && dynamicLight) {
-                        portGridWrap.addEventListener('mousemove', e => {
-                            const rect = portGridWrap.getBoundingClientRect();
-                            const x = e.clientX - rect.left;
-                            const y = e.clientY - rect.top;
-                            dynamicLight.style.background = `radial-gradient(400px circle at ${x}px ${y}px, rgba(0,255,135,0.06), transparent 70%)`;
-                        });
-                        portGridWrap.addEventListener('mouseleave', () => {
-                            dynamicLight.style.background = 'transparent';
-                        });
-                    }
-                }
 
                 // GLOBAL ANCHOR SMOOTH SCROLL WITH NAVBAR OFFSET
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2712,22 +1946,6 @@
                     if(waFloat) waFloat.classList.add('visible');
                 }, 1000);
 
-                // EVOLVE LIVE PREVIEWS
-                function evolve_livePreviews() {
-                    if (window.v2_isMobile || window.v2_prefersReduced) return; // Opcional: economizar no mobile
-                    const allCards = document.querySelectorAll('.port-card');
-                    allCards.forEach(card => {
-                        const cat = card.getAttribute('data-category');
-                        if (cat && siteData[cat]) {
-                            const mockupWrap = card.querySelector('.mockup-wrap');
-                            if (mockupWrap) {
-                                mockupWrap.classList.add('v2-template-simulation');
-                                mockupWrap.innerHTML = '<div class="v2-scanline"></div>' + getTemplateHTML(cat);
-                            }
-                        }
-                    });
-                }
-                evolve_livePreviews();
 
                 // EVOLVE MICRO-INTERACTIONS: MAGNETIC BUTTONS
                 function evolve_magneticButtons() {
@@ -2752,7 +1970,7 @@
                 // EVOLVE MICRO-INTERACTIONS: 3D TILT
                 function evolve_tilt3D() {
                     if (window.v2_isMobile || window.v2_prefersReduced) return;
-                    const tiltCards = document.querySelectorAll('.port-card, .v2-timeline-card, .v2-guarantee-card');
+                    const tiltCards = document.querySelectorAll('.v2-timeline-card, .v2-guarantee-card');
                     tiltCards.forEach(card => {
                         card.addEventListener('mousemove', (e) => {
                             const rect = card.getBoundingClientRect();
